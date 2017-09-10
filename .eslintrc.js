@@ -32,7 +32,7 @@ module.exports = {
                 ],
             },
         ],
-        "no-underscore-dangle": ["off", { "allow": ["foo_", "_bar"] }]
+        "no-underscore-dangle": ["off", { "allow": ["foo_", "_bar"] }],
     },
     "env": {
         "browser": true,

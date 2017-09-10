@@ -11,6 +11,7 @@ const port = 3000;
 
 app.use('/', connectHistoryApiFallback());
 app.use('/', express.static('dist'));
+app.use('/static', express.static('static'));
 
 if (process.env.NODE_ENV !== 'production') {
     const compiler = webpack(config);
