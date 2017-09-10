@@ -13,7 +13,7 @@ class Blog extends PureComponent {
 
     render() {
         const { blogs, theme } = this.props;
-        const _html = blogs.map(blog => <BlogItem key={blog.id} blog={blog} theme={theme} />);
+        const _html = blogs.map(blog => <BlogItem key={blog.blogId} blog={blog} theme={theme} />);
         return (
             <Grid centered>
                 <Grid.Column computer={10} mobile={16}>

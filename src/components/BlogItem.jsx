@@ -8,13 +8,13 @@ import Tags from './Tags';
 
 function BlogItem(props) {
     const ifNight = props.theme === 'night';
-    const { id, title, publishTime, tags, subContent } = props.blog;
-    const publishTimeStr = moment(publishTime).format('MM.DD.YYYY');
+    const { blogId, title, updateTime, tags, summary } = props.blog;
+    const publishTimeStr = moment(updateTime).format('MM.DD.YYYY');
     return (
         <Segment inverted={ifNight}>
             <Container text>
                 <h2>{title}</h2>
-                <p>{subContent}</p>
+                <p>{summary}</p>
                 <Grid columns={2}>
                     <Grid.Row>
                         <Grid.Column width={12} textAlign="left">
@@ -22,7 +22,7 @@ function BlogItem(props) {
                             <Tags tags={tags} />
                         </Grid.Column>
                         <Grid.Column width={4} textAlign="right">
-                            <Link to={`/blog/${id}`}><Label as="span" color="grey">阅读全部</Label></Link>
+                            <Link to={`/blog/${blogId}`}><Label as="span" color="grey">阅读全部</Label></Link>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -34,9 +34,10 @@ function BlogItem(props) {
 BlogItem.propTypes = {
     theme: PropTypes.string,
     blog: PropTypes.shape({
+        blogId: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        publishTime: PropTypes.number.isRequired,
-        subContent: PropTypes.string,
+        updateTime: PropTypes.number.isRequired,
+        summary: PropTypes.string,
         tags: PropTypes.arrayOf(PropTypes.string)
     }).isRequired
 };

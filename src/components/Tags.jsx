@@ -8,8 +8,8 @@ const Tag = ({ tag }) => (
 );
 
 const Tags = ({ tags }) => {
-    const hasTag = tags.length && tags.length > 0;
-    const _html = tags.map(tag => <Tag key={tag} tag={tag} />);
+    const hasTag = tags && tags.length && tags.length > 0;
+    const _html = tags && tags.map(tag => <Tag key={tag} tag={tag} />);
     if (hasTag) {
         return (
             <div className="xd-tags" style={{ display: 'inline-block', marginLeft: '.5rem' }}>
@@ -20,7 +20,9 @@ const Tags = ({ tags }) => {
             </div>
         );
     }
-    return '';
+    return (
+        <div style={{ display: 'inline-block' }} />
+    );
 };
 
 Tag.propTypes = {

@@ -1,4 +1,4 @@
-const root = 'http://localhost:3001/api';
+const root = 'http://localhost:8080/api/v1';
 
 export const GITHUB_URL = 'https://github.com/BaoXuebin';
 export const WEIBO_URL = 'http://weibo.com/u/3807733188';
