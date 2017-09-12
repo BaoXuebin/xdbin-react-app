@@ -4,17 +4,18 @@ import moment from 'moment';
 import { Container, Segment, Grid, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+import BlogContent from './BlogContent';
 import Tags from './Tags';
 
 function BlogItem(props) {
     const ifNight = props.theme === 'night';
-    const { blogId, title, updateTime, tags, summary } = props.blog;
+    const { blogId, title, updateTime, tags, summaryTextType, summary } = props.blog;
     const publishTimeStr = moment(updateTime).format('MM.DD.YYYY');
     return (
         <Segment inverted={ifNight}>
             <Container text>
                 <h2>{title}</h2>
-                <p>{summary}</p>
+                <BlogContent textType={summaryTextType} content={summary} />
                 <Grid columns={2}>
                     <Grid.Row>
                         <Grid.Column width={12} textAlign="left">

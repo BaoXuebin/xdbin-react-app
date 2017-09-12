@@ -11,6 +11,11 @@ function renderMarkdown(mdContent) {
 }
 
 function BlogContent({ textType, content }) {
+    if (textType === 'text') {
+        return (
+            <div>{content}</div>
+        );
+    }
     const _html = textType === 'html' ? content : renderMarkdown(content);
     return (
         <div dangerouslySetInnerHTML={{ __html: _html }} />

@@ -15,19 +15,17 @@ class Blog extends PureComponent {
         const { blogs, theme } = this.props;
         const _html = blogs.map(blog => <BlogItem key={blog.blogId} blog={blog} theme={theme} />);
         return (
-            <Grid centered>
-                <Grid.Column computer={10} mobile={16}>
-                    {_html}
-                    <Grid columns="equal">
-                        <Grid.Column textAlign="right">
-                            <Button color="green" content="上一页" />
-                        </Grid.Column>
-                        <Grid.Column textAlign="left">
-                            <Button color="green" content="下一页" />
-                        </Grid.Column>
-                    </Grid>
-                </Grid.Column>
-            </Grid>
+            <div>
+                {_html}
+                <Grid columns="equal">
+                    <Grid.Column textAlign="right">
+                        <Button color="green" content="上一页" />
+                    </Grid.Column>
+                    <Grid.Column textAlign="left">
+                        <Button color="green" content="下一页" />
+                    </Grid.Column>
+                </Grid>
+            </div>
         );
     }
 }
