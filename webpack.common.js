@@ -11,7 +11,8 @@ module.exports = {
     entry: [
         'react-hot-loader/patch',
         'webpack-hot-middleware/client',
-        path.resolve(APP_PATH, 'app.jsx')
+        'babel-polyfill',
+        path.resolve(APP_PATH, 'app/app.jsx')
     ],
     devtool: 'cheap-module-eval-source-map', // 用于开发环境，能够追踪错误信息到具体的源文件
     devServer: {
@@ -47,7 +48,7 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx$/,
-                loaders: 'babel-loader',
+                use: ['babel-loader'],
                 include: APP_PATH
             },
             {

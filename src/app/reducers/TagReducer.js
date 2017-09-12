@@ -1,6 +1,25 @@
 import { ActionConstants } from '../actions/TagAction';
 
-const initState = {};
+const initState = {
+    tags: [
+        {
+            tagId: 1,
+            tagName: 'Atom'
+        },
+        {
+            tagId: 2,
+            tagName: 'Sublime'
+        },
+        {
+            tagId: 3,
+            tagName: 'Java'
+        },
+        {
+            tagId: 4,
+            tagName: 'ReactJs'
+        }
+    ]
+};
 
 const TagReducer = (state = initState, action) => {
     switch (action.type) {

@@ -1,7 +1,8 @@
 {
     "presets": [
         ["es2015", { "module": false }],
-        "react"
+        "react",
+        "stage-0"
     ],
     "plugins": ["dynamic-import-webpack"]
 }

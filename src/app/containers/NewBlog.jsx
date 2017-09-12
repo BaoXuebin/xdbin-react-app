@@ -13,7 +13,6 @@ class NewBlog extends PureComponent {
     }
 
     render() {
-        const tags = this.props.tags;
         return (
             <Segment>
                 <Header as="h2">
@@ -24,7 +23,7 @@ class NewBlog extends PureComponent {
                 </Header>
                 <Divider />
                 <Input placeholder="输入标题" fluid /><br />
-                <TagPool tags={tags} /><br />
+                <TagPool /><br />
                 <EditorAndPreview label="概要内容" /><br />
                 <EditorAndPreview label="博客内容" rows={20} /><br />
                 <Radio toggle defaultChecked label="公开" />
@@ -36,17 +35,7 @@ class NewBlog extends PureComponent {
 }
 
 NewBlog.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.object)
-};
-NewBlog.defaultProps = {
-    tags: []
+    dispatch: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-    return {
-        tags: state.Tag.tags
-    };
-}
-
-export default connect(mapStateToProps)(NewBlog);
+export default connect()(NewBlog);
