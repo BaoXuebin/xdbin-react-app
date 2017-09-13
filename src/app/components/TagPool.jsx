@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Icon, Container, Divider } from 'semantic-ui-react';
+import { Icon, Container, Divider, Label } from 'semantic-ui-react';
 
 import { selectTag, deleteTag } from '../actions/NewBlogAction';
 
 const SelectedTag = ({ tagId, tagName, onDelete }) => (
-    <div rel={tagId} className="ui image label" >
+    <Label color="green">
         {tagName}
         <Icon name="delete" onClick={() => { onDelete({ tagId, tagName }); }} />
-    </div>
+    </Label>
 );
 
-const Tag = ({ tagId, tagName, onSelect }) => (
-    <div rel={tagId} className="ui image label" onClick={() => { onSelect({ tagId, tagName }); }}>
-        {tagName}
-    </div>
+const Tag = ({ disabled, tagId, tagName, onSelect }) => (
+    <Label as="a" color={disabled ? 'grey' : 'green'} onClick={() => { if (!disabled) { onSelect({ tagId, tagName }); } }} content={tagName} />
 );
 
 Tag.propTypes = {
+    disabled: PropTypes.bool.isRequired,
     tagId: PropTypes.number.isRequired,
     tagName: PropTypes.string.isRequired,
     onSelect: PropTypes.func.isRequired
@@ -44,14 +43,25 @@ class TagPool extends Component {
         this.props.dispatch(deleteTag(tag));
     }
 
+    ifSelected(tag) {
+        const selectTags = this.props.selectTags;
+        let index = -1;
+        selectTags.forEach((t, i) => {
+            if (t.tagId === tag.tagId) {
+                index = i;
+            }
+        });
+        return index >= 0;
+    }
+
     render() {
         const { tags, selectTags } = this.props;
         return (
-            <div className="xd-tags" style={{ display: 'inline-block', marginLeft: '.5rem' }}>
+            <div className="xd-tags" style={{ marginLeft: '.5rem' }}>
                 <Container fluid>
                     {selectTags.map(tag => <SelectedTag key={tag.tagId} tagId={tag.tagId} tagName={tag.tagName} onDelete={this.deleteTag} />)}
                     <p style={{ marginTop: '1rem' }}># 标签池</p>
-                    {tags.length > 0 && tags.map(tag => <Tag key={tag.tagId} tagId={tag.tagId} tagName={tag.tagName} onSelect={this.selectTag} />)}
+                    {tags.map(tag => <Tag key={tag.tagId} disabled={this.ifSelected(tag)} tagId={tag.tagId} tagName={tag.tagName} onSelect={this.selectTag} />)}
                     <Divider />
                 </Container>
             </div>

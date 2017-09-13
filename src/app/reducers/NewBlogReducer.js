@@ -2,7 +2,8 @@ import { ActionConstants } from '../actions/NewBlogAction';
 
 const initState = {
     selectTags: [],
-    ifPub: true
+    ifPub: true,
+    errors: []
 };
 
 const NewBlogReducer = (state = initState, action) => {
@@ -13,9 +14,21 @@ const NewBlogReducer = (state = initState, action) => {
             });
         case ActionConstants.DELETE_TAG: {
             const tag = action.tag;
-            const selectTags = state.selectTags.filter(selectTag => selectTag.id !== tag.id);
+            const selectTags = state.selectTags.filter(selectTag => selectTag.tagId !== tag.tagId);
             return Object.assign({}, state, { selectTags });
         }
+        case ActionConstants.TOGGLE_PUB:
+            return Object.assign({}, state, { ifPub: action.ifPub });
+        case ActionConstants.VALIDATE_ERROR:
+            return Object.assign({}, state, { errors: action.errors });
+        case ActionConstants.REMOVE_ERROR: {
+            const errors = state.errors.filter(e => e && (e.errorKey !== action.errorKey));
+            return Object.assign({}, state, { errors });
+        }
+        case ActionConstants.SUBMIT_BLOG:
+            return Object.assign({}, state, { loading: true });
+        case ActionConstants.SUBMIT_BLOG_SUCCESS:
+            return Object.assign({}, state, { loading: false });
         default:
             return state;
     }

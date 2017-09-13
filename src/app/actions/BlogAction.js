@@ -15,25 +15,36 @@ function fetchBlog() {
 }
 
 function fetchBlogSuccess(blogs) {
-    const refreshTime = new Date().getTime();
+    let more = true;
+    if (blogs.length < 10) {
+        more = false;
+    }
     return {
         type: ActionConstants.FETCH_BLOG_SUCCESS,
         blogs,
-        refreshTime
+        more
     };
 }
 
-export function fetchBlogIfNeeded() {
+export function fetchBlogIfNeeded(force) {
     return (dispatch, getState) => {
+        const page = getState().Blog.page || 1;
         const refreshTime = getState().Blog.refreshTime;
         const currentTime = new Date().getTime();
-        if (!refreshTime || currentTime - refreshTime > 1000 * 60 * 5) {
+        if (force || !refreshTime || currentTime - refreshTime > 1000 * 60 * 5) {
             dispatch(fetchBlog(refreshTime));
-            return fetch(FETCH_BLOG_URL).then(response => response.json()).then(json => dispatch(fetchBlogSuccess(json)));
+            return fetch(`${FETCH_BLOG_URL}?page=${page}`).then(response => response.json()).then(json => dispatch(fetchBlogSuccess(json)));
         }
         return {
             type: 'NOTHING'
         };
+    };
+}
+
+export function fetchMoreBlogIfNeeded() {
+    return (dispatch, getState) => {
+        const page = getState().Blog.page || 1;
+        return fetch(`${FETCH_BLOG_URL}?page=${page}`).then(response => response.json()).then(json => dispatch(fetchBlogSuccess(json)));
     };
 }
 

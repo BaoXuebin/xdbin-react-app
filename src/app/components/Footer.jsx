@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Segment, Container } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
 const Footer = ({ theme }) => {
     const ifNight = theme === 'night';
     return (
-        <Segment color={ifNight ? 'black' : 'grey'} inverted>
-            <Container textAlign="center">
-                © 2017 xdbin.com | <a style={{ color: 'white' }} href="http://www.miitbeian.gov.cn/">豫ICP备17010915号</a>
-            </Container>
-        </Segment>
+        <Container textAlign="center" className="xd-footer">
+            © 2017 xdbin.com | <a href="http://www.miitbeian.gov.cn/">豫ICP备17010915号</a>
+        </Container>
     );
 };
 
