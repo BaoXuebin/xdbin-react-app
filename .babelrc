@@ -4,5 +4,14 @@
         "react",
         "stage-0"
     ],
-    "plugins": ["dynamic-import-webpack"]
+    "plugins": [
+        [
+            "transform-runtime", {
+                "helpers": false,
+                "polyfill": false,
+                "regenerator": true,
+                "moduleName": "babel-runtime"
+            }
+        ]
+    ]
 }

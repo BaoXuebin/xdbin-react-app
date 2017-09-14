@@ -21,8 +21,10 @@ const BlogReducer = (state = initState, action) => {
                 more: action.more
             });
         }
+        case ActionConstants.FETCH_BLOG_DETAIL:
+            return Object.assign({}, state, { loading: true });
         case ActionConstants.FETCH_BLOG_DETAIL_SUCCESS:
-            return Object.assign({}, state, { detail: action.blog });
+            return Object.assign({}, state, { detail: action.blog, loading: false });
         default:
             return state;
     }

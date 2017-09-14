@@ -12,7 +12,7 @@ function BlogItem(props) {
     const { blogId, title, updateTime, tags, summaryTextType, summary } = props.blog;
     const publishTimeStr = moment(updateTime).format('MM.DD.YYYY');
     return (
-        <Segment inverted={ifNight}>
+        <Segment>
             <Container text>
                 <h2>{title}</h2>
                 <BlogContent textType={summaryTextType} content={summary} />

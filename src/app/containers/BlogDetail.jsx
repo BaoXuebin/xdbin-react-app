@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Grid, Segment, Container, Header, Divider } from 'semantic-ui-react';
+import { Container, Header, Divider, Dimmer, Loader } from 'semantic-ui-react';
 import moment from 'moment';
 
 import Tags from '../components/Tags';
@@ -22,10 +22,14 @@ class BlogDetail extends Component {
     }
 
     render() {
+        const { loading, theme } = this.props;
         const { title, updateTime, tags, contentTextType, content } = this.props.blogDetail;
         return (
-            <Segment>
-                <Container text>
+            <Container text className="xd-content">
+                {loading ?
+                    <Dimmer active inverted={theme === 'day'}>
+                        <Loader size="medium">Loading</Loader>
+                    </Dimmer> :
                     <div>
                         <Header as="h2" content={title} />
                         <span style={{ color: 'gray', fontSize: 13 }}>{moment(updateTime).format('MM.DD.YYYY')}</span>
@@ -33,8 +37,8 @@ class BlogDetail extends Component {
                         <Divider />
                         <BlogContent textType={contentTextType} content={content} />
                     </div>
-                </Container>
-            </Segment>
+                }
+            </Container>
         );
     }
 }
@@ -48,7 +52,9 @@ BlogDetail.propTypes = {
         updateTime: PropTypes.number,
         content: PropTypes.string,
         tags: PropTypes.arrayOf(PropTypes.string)
-    })
+    }),
+    loading: PropTypes.bool.isRequired,
+    theme: PropTypes.string.isRequired
 };
 BlogDetail.defaultProps = {
     blogDetail: {
@@ -60,7 +66,9 @@ BlogDetail.defaultProps = {
 
 function mapStateToProps(state) {
     return {
-        blogDetail: state.Blog.detail
+        blogDetail: state.Blog.detail,
+        loading: state.Blog.loading,
+        theme: state.Global.theme
     };
 }
 

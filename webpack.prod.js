@@ -7,10 +7,10 @@ const ROOT_PATH = path.resolve(__dirname);
 const APP_PATH = path.resolve(ROOT_PATH, 'src/app');
 
 module.exports = Merge(CommonConfig, {
-    // entry: [
-    //     'babel-polyfill',
-    //     path.resolve(APP_PATH, 'app.jsx')
-    // ],
+    entry: {
+        app: path.resolve(APP_PATH, 'app.jsx'),
+        moment: ['moment']
+    },
     devtool: 'cheap-module-source-map',
     plugins: [
         new webpack.LoaderOptionsPlugin({

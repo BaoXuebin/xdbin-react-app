@@ -2,18 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const ROOT_PATH = path.resolve(__dirname);
 const APP_PATH = path.resolve(ROOT_PATH, 'src');
-const BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
+const BUILD_PATH = path.resolve(ROOT_PATH, 'dist/js/');
 
 module.exports = {
-    entry: [
-        'react-hot-loader/patch',
-        'webpack-hot-middleware/client',
-        'babel-polyfill',
-        path.resolve(APP_PATH, 'app/app.jsx')
-    ],
+    // entry: [
+    //     'react-hot-loader/patch',
+    //     'webpack-hot-middleware/client',
+    //     path.resolve(APP_PATH, 'app/app.jsx')
+    // ],
     devtool: 'cheap-module-eval-source-map', // 用于开发环境，能够追踪错误信息到具体的源文件
     devServer: {
         contentBase: BUILD_PATH,
@@ -24,12 +24,13 @@ module.exports = {
     plugins: [
         // 清空 dist 文件夹
         new CleanWebpackPlugin(['dist']),
+        new ExtractTextPlugin('css/xdbin.style.css'),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['polyfills', 'vendor'].reverse()
+            name: [].reverse()
         }),
         // html 模板
         new HtmlWebpackPlugin({
-            filename: 'index.html',
+            filename: '../index.html',
             template: path.resolve(ROOT_PATH, 'index.tpl.html')
         }),
         // 热更新
@@ -41,7 +42,7 @@ module.exports = {
         path: BUILD_PATH,
         filename: '[name].bundle.js',
         chunkFilename: '[name].bundle.js',
-        publicPath: '/',
+        publicPath: '/js/',
         sourceMapFilename: '[name].map'
     },
     module: {

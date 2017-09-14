@@ -32,7 +32,7 @@ const Root = () => (
                             {NewBlog => <NewBlog />}
                         </Bundle>
                     </Layout>} />
-                <Route path="/blog/:id" render={({ match }) => <Layout>
+                    <Route path="/blog/:id" render={({ match }) => <Layout>
                         <Bundle load={() => import('./BlogDetail')}>
                             {BlogDetail => <BlogDetail match={match} />}
                         </Bundle>

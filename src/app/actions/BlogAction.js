@@ -5,6 +5,7 @@ export const ActionConstants = {
     FETCH_BLOG: 'FETCH_BLOG',
     FETCH_BLOG_SUCCESS: 'FETCH_BLOG_SUCCESS',
     FETCH_BLOG_ERROR: 'FETCH_BLOG_ERROR',
+    FETCH_BLOG_DETAIL: 'FETCH_BLOG_DETAIL',
     FETCH_BLOG_DETAIL_SUCCESS: 'FETCH_BLOG_DETAIL_SUCCESS'
 };
 
@@ -48,6 +49,12 @@ export function fetchMoreBlogIfNeeded() {
     };
 }
 
+function fetchBlogDetail() {
+    return {
+        type: ActionConstants.FETCH_BLOG_DETAIL
+    };
+}
+
 function fetchBlogDetailSuccess(blog) {
     return {
         type: ActionConstants.FETCH_BLOG_DETAIL_SUCCESS,
@@ -56,5 +63,8 @@ function fetchBlogDetailSuccess(blog) {
 }
 
 export function fetchBlogDetailIfNeeded(id) {
-    return dispatch => fetch(`${FETCH_BLOG_DETAIL_URL}${id}`).then(response => response.json()).then(json => dispatch(fetchBlogDetailSuccess(json)));
+    return (dispatch) => {
+        dispatch(fetchBlogDetail());
+        return fetch(`${FETCH_BLOG_DETAIL_URL}${id}`).then(response => response.json()).then(json => dispatch(fetchBlogDetailSuccess(json)));
+    };
 }
