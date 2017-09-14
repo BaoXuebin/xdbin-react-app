@@ -1,4 +1,5 @@
-const root = 'http://www.xdbin.com/api/v1';
+// const root = '//www.xdbin.com/api/v1';
+const root = 'http://localhost:8080/api/v1';
 
 export const GITHUB_URL = 'https://github.com/BaoXuebin';
 export const WEIBO_URL = 'http://weibo.com/u/3807733188';
