@@ -2,12 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Segment, Grid, Icon, Popup, Dropdown } from 'semantic-ui-react';
+import {
+    Link,
+    withRouter
+} from 'react-router-dom';
 
 import { GITHUB_URL, WEIBO_URL } from '../data/Urls';
 import { toggleTheme } from '../actions/GlobalAction';
 
 function Head(props) {
-    const { text, theme, dispatch } = props;
+    const { text, theme, dispatch, history } = props;
     const handleToggleTheme = () => {
         dispatch(toggleTheme(theme));
     };
@@ -18,7 +22,7 @@ function Head(props) {
                 <Container>
                     <Grid columns={2}>
                         <Grid.Column>
-                            <h2>{text}</h2>
+                            <Link to="/"><h2 style={{ color: 'black' }}>{text}</h2></Link>
                         </Grid.Column>
                         <Grid.Column textAlign="right">
                             <Popup
@@ -33,8 +37,9 @@ function Head(props) {
                             />
                             <Dropdown>
                                 <Dropdown.Menu>
-                                    { theme === 'day' && <Dropdown.Item icon="moon" onClick={handleToggleTheme} /> }
-                                    { theme === 'night' && <Dropdown.Item icon="sun" onClick={handleToggleTheme} /> }
+                                    { theme === 'day' && <Dropdown.Item icon="moon" content="主题" onClick={handleToggleTheme} /> }
+                                    { theme === 'night' && <Dropdown.Item icon="sun" content="主题" onClick={handleToggleTheme} /> }
+                                    <Dropdown.Item icon="privacy" content="登录" onClick={() => history.push('/login')} />
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Grid.Column>
@@ -48,7 +53,8 @@ function Head(props) {
 Head.propTypes = {
     dispatch: PropTypes.func.isRequired,
     text: PropTypes.string,
-    theme: PropTypes.string.isRequired
+    theme: PropTypes.string.isRequired,
+    history: PropTypes.shape().isRequired
 };
 Head.defaultProps = {
     text: 'xdbin'
@@ -60,4 +66,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Head);
+export default withRouter(connect(mapStateToProps)(Head));

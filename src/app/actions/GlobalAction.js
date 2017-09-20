@@ -1,7 +1,8 @@
 export const ActionConstants = {
     TOGGLE_THEME: 'TOGGLE_THEME',
     PAGE_LOADING: 'PAGE_LOADING',
-    PAGE_LOAD_FINISH: 'PAGE_LOAD_FINISH'
+    PAGE_LOAD_FINISH: 'PAGE_LOAD_FINISH',
+    LOGIN_SUCCESS: 'LOGIN_SUCCESS'
 };
 
 export function toggleTheme(currentTheme) {

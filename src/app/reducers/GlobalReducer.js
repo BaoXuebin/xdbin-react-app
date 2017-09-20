@@ -13,6 +13,8 @@ const GlobalReducer = (state = initState, action) => {
             return Object.assign({}, state, { loading: true });
         case ActionConstants.PAGE_LOAD_FINISH:
             return Object.assign({}, state, { loading: false });
+        case ActionConstants.LOGIN_SUCCESS:
+            return Object.assign({}, state, { user: action.user });
         default:
             return state;
     }

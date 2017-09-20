@@ -12,7 +12,7 @@ class Bundle extends Component {
         const { default: mod } = await this.props.load();
         this.setState({
             mod: mod.default || mod
-        })
+        });
     }
 
     render() {
