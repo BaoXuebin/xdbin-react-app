@@ -47,6 +47,15 @@ const Login = () => (
     </Layout>
 );
 
+// 管理页面
+const Manager = () => (
+    <Layout>
+        <Bundle load={() => import('./Manager')}>
+            {Manager => <Manager />}
+        </Bundle>
+    </Layout>
+);
+
 const ErrorPage = () => (
     <Layout>
         <Bundle load={() => import('./ErrorPage')}>
@@ -63,6 +72,7 @@ const Root = () => (
                     <Route exact path="/" component={Blog} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/blog" component={Blog} />
+                    <AuthRoute path="/manager" component={Manager} />
                     <AuthRoute path="/blog/add" component={NewBlog} />
                     <Route path="/blog/:id" render={({ match }) => <BlogDetail match={match} />} />
                     <Route component={ErrorPage} />

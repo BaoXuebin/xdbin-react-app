@@ -1,3 +1,6 @@
+import fetch from 'isomorphic-fetch';
+import { LOGIN_URL } from '../data/Urls';
+
 export const ActionConstants = {
     LOGIN: 'LOGIN',
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
@@ -28,20 +31,23 @@ export function loginError(error) {
     };
 }
 
-export function loginIfNeeded(name, pwd) {
+export function loginIfNeeded(loginBean) {
     return (dispatch) => {
         dispatch(login());
-        setTimeout(() => {
-            if (pwd === name) {
-                dispatch(loginSuccess({
-                    userId: 'baoxuebin',
-                    username: name,
-                    token: `${name}${pwd}`
-                }));
-            } else {
-                dispatch(loginError('用户名密码不匹配'));
-            }
-        }, 3000);
+        return fetch(LOGIN_URL, {
+            method: 'POST',
+            headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(loginBean)
+        })
+            .then(response => response.json())
+            .then((json) => {
+                if (json.code) {
+                    dispatch(loginError(json.error));
+                } else {
+                    dispatch(loginSuccess(json));
+                }
+            })
+            .catch(() => dispatch(loginError('网络异常或者未知错误')));
     };
 }
 

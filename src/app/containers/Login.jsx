@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Input, Button, Label } from 'semantic-ui-react';
 import {
-    withRouter
+    withRouter,
+    Redirect
 } from 'react-router-dom';
 
 import { loginIfNeeded, loginError, removeError } from '../actions/LoginAction';
@@ -19,7 +20,10 @@ class Login extends Component {
         const username = this.username.inputRef.value;
         const password = this.password.inputRef.value;
         if (username && password) {
-            this.props.dispatch(loginIfNeeded(username, password));
+            this.props.dispatch(loginIfNeeded({
+                username,
+                password
+            }));
         } else {
             this.props.dispatch(loginError('用户名或密码不能为空'));
         }
@@ -30,35 +34,40 @@ class Login extends Component {
     }
 
     render() {
-        const { loading, error } = this.props;
+        const { loading, error, token } = this.props;
+        if (token === null) {
+            return (
+                <div style={{ width: '260px', margin: '12% auto', marginBottom: '25%', textAlign: 'center' }}>
+                    <Input
+                        icon="users"
+                        iconPosition="left"
+                        placeholder="这里输入用户名"
+                        fluid
+                        error={error != null}
+                        ref={(username) => { this.username = username; }}
+                        onFocus={this.handleFocus}
+                    /><br />
+                    <Input
+                        type="password"
+                        icon="lock"
+                        iconPosition="left"
+                        placeholder="这里输入密码"
+                        fluid
+                        error={error !== null}
+                        ref={(password) => { this.password = password; }}
+                        onFocus={this.handleFocus}
+                    /><br />
+                    <br />
+                    <Button loading={loading} disabled={loading} color="green" content="登录" fluid style={{ marginBottom: '5px' }} onClick={this.handleLogin} />
+                    <br />
+                    {error !== null &&
+                        <Label basic color="red">{error}</Label>
+                    }
+                </div>
+            );
+        }
         return (
-            <div style={{ width: '260px', margin: '12% auto', marginBottom: '25%', textAlign: 'center' }}>
-                <Input
-                    icon="users"
-                    iconPosition="left"
-                    placeholder="这里输入用户名"
-                    fluid
-                    error={error != null}
-                    ref={(username) => { this.username = username; }}
-                    onFocus={this.handleFocus}
-                /><br />
-                <Input
-                    type="password"
-                    icon="lock"
-                    iconPosition="left"
-                    placeholder="这里输入密码"
-                    fluid
-                    error={error !== null}
-                    ref={(password) => { this.password = password; }}
-                    onFocus={this.handleFocus}
-                /><br />
-                <br />
-                <Button loading={loading} disabled={loading} color="green" content="登录" fluid style={{ marginBottom: '5px' }} onClick={this.handleLogin} />
-                <br />
-                {error !== null &&
-                    <Label basic color="red">{error}</Label>
-                }
-            </div>
+            <Redirect to="/manager" />
         );
     }
 }
@@ -66,16 +75,19 @@ class Login extends Component {
 Login.propTypes = {
     dispatch: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
-    error: PropTypes.string
+    error: PropTypes.string,
+    token: PropTypes.string
 };
 Login.defaultProps = {
-    error: null
+    error: null,
+    token: null
 };
 
 function mapStateToProps(state) {
     return {
         loading: state.Login.loading,
-        error: state.Login.error
+        error: state.Login.error,
+        token: state.Global.token
     };
 }
 
