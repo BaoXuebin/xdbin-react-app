@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import moment from 'moment';
+import {
+    Button, Header, Input
+} from 'semantic-ui-react';
+import {
+    withRouter
+} from 'react-router-dom';
 
 import BlogTable from '../components/BlogTable';
+import TagPool from '../components/TagPool';
+import { fetchTagIfNeed } from '../actions/TagAction';
 
 class Manager extends Component {
     componentWillMount() {
         // 加载博客列表
+        // 加载标签
+        this.props.dispatch(fetchTagIfNeed());
     }
 
     render() {
@@ -21,10 +33,33 @@ class Manager extends Component {
                 publishTime: moment().format('MM.DD.YYYY')
             }
         ];
+        const { history } = this.props;
         return (
-            <BlogTable blogs={blogs} />
+            <div>
+                <Header as="h3" content="博客管理" />
+                <Button content="Add" icon="add" color="green" labelPosition="left" onClick={() => history.push('/blog/add')} />
+                <BlogTable blogs={blogs} />
+                <Header as="h3" content="标签管理" />
+                <Input
+                    icon="tags"
+                    iconPosition="left"
+                    label={{ tag: true, content: '添加标签' }}
+                    labelPosition="right"
+                    placeholder="添加标签"
+                />
+                <TagPool />
+            </div>
         );
     }
 }
 
-export default Manager;
+Manager.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    history: PropTypes.shape().isRequired
+};
+
+function mapStateToProps(state) {
+    return {};
+}
+
+export default withRouter(connect(mapStateToProps)(Manager));

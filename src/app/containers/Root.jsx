@@ -1,10 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
-    BrowserRouter as Router,
     Route,
     Switch
 } from 'react-router-dom';
+import { BrowserRouter } from 'react-g-analytics';
 
 import '../../../static/styles/main.less';
 import configureStore from '../stores/ConfigureStore';
@@ -66,7 +66,7 @@ const ErrorPage = () => (
 
 const Root = () => (
     <Provider store={configureStore()}>
-        <Router>
+        <BrowserRouter id="UA-107197856-1">
             <div>
                 <Switch>
                     <Route exact path="/" component={Blog} />
@@ -78,7 +78,7 @@ const Root = () => (
                     <Route component={ErrorPage} />
                 </Switch>
             </div>
-        </Router>
+        </BrowserRouter>
     </Provider>
 );
 
