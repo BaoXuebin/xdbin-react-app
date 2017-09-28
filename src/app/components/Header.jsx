@@ -21,39 +21,37 @@ function Head(props) {
     };
     const ifNight = theme === 'night';
     return (
-        <div style={{ marginBottom: 15 }}>
-            <Segment color={ifNight ? 'black' : 'green'} inverted={ifNight}>
-                <Container>
-                    <Grid columns={2}>
-                        <Grid.Column>
-                            <Link to="/"><h2 style={{ color: ifNight ? 'white' : 'black' }}>{text}</h2></Link>
-                        </Grid.Column>
-                        <Grid.Column textAlign="right">
-                            <Popup
-                                trigger={<a href={WEIBO_URL} style={{ color: 'black' }}><Icon name="weibo" inverted={ifNight} size="large" /></a>}
-                                content="@不经意的你"
-                                on="hover"
-                            />
-                            <Popup
-                                trigger={<a href={GITHUB_URL} style={{ color: 'black' }}><Icon name="github" inverted={ifNight} size="large" /></a>}
-                                content="@BaoXuebin"
-                                on="hover"
-                            />
-                            <Dropdown>
-                                <Dropdown.Menu>
-                                    { theme === 'day' && <Dropdown.Item icon="moon" content="主题" onClick={handleToggleTheme} /> }
-                                    { theme === 'night' && <Dropdown.Item icon="sun" content="主题" onClick={handleToggleTheme} /> }
-                                    { token === null
-                                        ? <Dropdown.Item icon="privacy" content="登录" onClick={() => history.push('/login')} />
-                                        : <Dropdown.Item icon="log out" content="退出" onClick={handleLogout} />
-                                    }
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </Grid.Column>
-                    </Grid>
-                </Container>
-            </Segment>
-        </div>
+        <Segment color={ifNight ? 'black' : 'green'} inverted={ifNight}>
+            <Container>
+                <Grid columns={2}>
+                    <Grid.Column>
+                        <Link to="/"><h2 style={{ color: ifNight ? 'white' : 'black' }}>{text}</h2></Link>
+                    </Grid.Column>
+                    <Grid.Column textAlign="right">
+                        <Popup
+                            trigger={<a href={WEIBO_URL} style={{ color: 'black' }}><Icon name="weibo" inverted={ifNight} size="large" /></a>}
+                            content="@不经意的你"
+                            on="hover"
+                        />
+                        <Popup
+                            trigger={<a href={GITHUB_URL} style={{ color: 'black' }}><Icon name="github" inverted={ifNight} size="large" /></a>}
+                            content="@BaoXuebin"
+                            on="hover"
+                        />
+                        <Dropdown>
+                            <Dropdown.Menu>
+                                { theme === 'day' && <Dropdown.Item icon="moon" content="主题" onClick={handleToggleTheme} /> }
+                                { theme === 'night' && <Dropdown.Item icon="sun" content="主题" onClick={handleToggleTheme} /> }
+                                { token === null
+                                    ? <Dropdown.Item icon="privacy" content="登录" onClick={() => history.push('/login')} />
+                                    : <Dropdown.Item icon="log out" content="退出" onClick={handleLogout} />
+                                }
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Grid.Column>
+                </Grid>
+            </Container>
+        </Segment>
     );
 }
 

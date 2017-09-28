@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Container, Segment, Grid, Label } from 'semantic-ui-react';
+import { Container, Grid, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import BlogContent from './BlogContent';
@@ -12,23 +12,22 @@ function BlogItem(props) {
     const { blogId, title, updateTime, tags, summaryTextType, summary } = props.blog;
     const publishTimeStr = moment(updateTime).format('MM.DD.YYYY');
     return (
-        <Segment>
-            <Container text>
-                <h2>{title}</h2>
-                <BlogContent textType={summaryTextType} content={summary} />
-                <Grid columns={2}>
-                    <Grid.Row>
-                        <Grid.Column width={10} textAlign="left">
-                            <span style={{ color: 'gray', fontSize: 13 }}>{publishTimeStr}</span>
-                            <Tags tags={tags} />
-                        </Grid.Column>
-                        <Grid.Column width={6} textAlign="right">
-                            <Link to={`/blog/${blogId}`}><Label as="span" color="grey">阅读全部</Label></Link>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-            </Container>
-        </Segment>
+        <Container text>
+            <h2>{title}</h2>
+            <BlogContent textType={summaryTextType} content={summary} />
+            <Grid columns={2}>
+                <Grid.Row>
+                    <Grid.Column textAlign="left">
+                        <span style={{ color: 'gray', fontSize: 13 }}>{publishTimeStr}</span>
+                        <Tags tags={tags} />
+                    </Grid.Column>
+                    <Grid.Column textAlign="right">
+                        <Link to={`/blog/${blogId}`}><span style={{ fontSize: 14 }}>阅读全部</span></Link>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
+            <Divider />
+        </Container>
     );
 }
 

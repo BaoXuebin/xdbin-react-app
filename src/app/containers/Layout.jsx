@@ -20,7 +20,7 @@ class Layout extends Component {
         return (
             <div>
                 <Header />
-                <Grid centered>
+                <Grid centered padded className="aaa">
                     <Grid.Column computer={10} mobile={16}>
                         {this.props.children}
                         <Divider />
