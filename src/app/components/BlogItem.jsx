@@ -18,11 +18,11 @@ function BlogItem(props) {
                 <BlogContent textType={summaryTextType} content={summary} />
                 <Grid columns={2}>
                     <Grid.Row>
-                        <Grid.Column width={12} textAlign="left">
+                        <Grid.Column width={10} textAlign="left">
                             <span style={{ color: 'gray', fontSize: 13 }}>{publishTimeStr}</span>
                             <Tags tags={tags} />
                         </Grid.Column>
-                        <Grid.Column width={4} textAlign="right">
+                        <Grid.Column width={6} textAlign="right">
                             <Link to={`/blog/${blogId}`}><Label as="span" color="grey">阅读全部</Label></Link>
                         </Grid.Column>
                     </Grid.Row>

@@ -6,7 +6,8 @@ export const ActionConstants = {
     PAGE_LOAD_FINISH: 'PAGE_LOAD_FINISH',
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
     VALIDATE_TOKEN_SUCCESS: 'VALIDATE_TOKEN_SUCCESS',
-    VALIDATE_TOKEN_ERROR: 'VALIDATE_TOKEN_ERROR'
+    VALIDATE_TOKEN_ERROR: 'VALIDATE_TOKEN_ERROR',
+    LOGOUT: 'LOGOUT'
 };
 
 export function toggleTheme(currentTheme) {
@@ -62,4 +63,10 @@ export function validate(token, history) {
                 dispatch(validateSuccess(token));
             }
         }).catch(() => dispatch(validateError()));
+}
+
+export function logout() {
+    return {
+        type: ActionConstants.LOGOUT
+    };
 }

@@ -28,6 +28,7 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "connect-history-api-fallback": "^1.3.0",
+    "es6-promise": "^4.1.1",
     "highlight.js": "^9.12.0",
     "isomorphic-fetch": "^2.2.1",
     "marked": "^0.3.6",

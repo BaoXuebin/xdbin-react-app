@@ -41,6 +41,9 @@ module.exports = {
         "es6": true
     },
     "globals": {
-        "Stomp": true
+        "Stomp": true,
+        // google analytics 相关全局变量
+        "dataLayer": true,
+        "arguments": true
     }
 };

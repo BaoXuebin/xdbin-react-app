@@ -1,4 +1,5 @@
 import { SUBMIT_BLOG_URL } from '../data/Urls';
+import authFetch from './AuthAction';
 
 export const ActionConstants = {
     SELECT_TAG: 'SELECT_TAG',
@@ -57,13 +58,19 @@ function submitBlogSuccess() {
     };
 }
 
-export function submitBlogIfNeeded(blog) {
+export function submitBlogIfNeeded(blog, history) {
     return (dispatch) => {
         dispatch(submitBlog);
-        return fetch(SUBMIT_BLOG_URL, {
+        const params = {
             method: 'POST',
-            headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(blog)
-        }).then(response => response.json()).then(json => dispatch(submitBlogSuccess(json)));
+        };
+        const success = json => submitBlogSuccess(json);
+        const error = () => {};
+        return authFetch(dispatch, SUBMIT_BLOG_URL, params, success, error, history);
     };
 }

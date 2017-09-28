@@ -8,12 +8,16 @@ import {
 } from 'react-router-dom';
 
 import { GITHUB_URL, WEIBO_URL } from '../data/Urls';
-import { toggleTheme } from '../actions/GlobalAction';
+import { toggleTheme, logout } from '../actions/GlobalAction';
 
 function Head(props) {
-    const { text, theme, dispatch, history } = props;
+    const { text, theme, dispatch, history, token } = props;
     const handleToggleTheme = () => {
         dispatch(toggleTheme(theme));
+    };
+    const handleLogout = () => {
+        dispatch(logout());
+        history.push('/login');
     };
     const ifNight = theme === 'night';
     return (
@@ -22,7 +26,7 @@ function Head(props) {
                 <Container>
                     <Grid columns={2}>
                         <Grid.Column>
-                            <Link to="/"><h2 style={{ color: 'black' }}>{text}</h2></Link>
+                            <Link to="/"><h2 style={{ color: ifNight ? 'white' : 'black' }}>{text}</h2></Link>
                         </Grid.Column>
                         <Grid.Column textAlign="right">
                             <Popup
@@ -39,7 +43,10 @@ function Head(props) {
                                 <Dropdown.Menu>
                                     { theme === 'day' && <Dropdown.Item icon="moon" content="主题" onClick={handleToggleTheme} /> }
                                     { theme === 'night' && <Dropdown.Item icon="sun" content="主题" onClick={handleToggleTheme} /> }
-                                    <Dropdown.Item icon="privacy" content="登录" onClick={() => history.push('/login')} />
+                                    { token === null
+                                        ? <Dropdown.Item icon="privacy" content="登录" onClick={() => history.push('/login')} />
+                                        : <Dropdown.Item icon="log out" content="退出" onClick={handleLogout} />
+                                    }
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Grid.Column>
@@ -54,15 +61,18 @@ Head.propTypes = {
     dispatch: PropTypes.func.isRequired,
     text: PropTypes.string,
     theme: PropTypes.string.isRequired,
-    history: PropTypes.shape().isRequired
+    history: PropTypes.shape().isRequired,
+    token: PropTypes.string
 };
 Head.defaultProps = {
-    text: 'xdbin'
+    text: 'xdbin',
+    token: null
 };
 
 function mapStateToProps(state) {
     return {
-        theme: state.Global.theme
+        theme: state.Global.theme,
+        token: state.Global.token
     };
 }
 

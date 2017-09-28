@@ -1,18 +1,25 @@
 import fetch from 'isomorphic-fetch';
-import { FETCH_BLOG_URL, FETCH_BLOG_DETAIL_URL } from '../data/Urls';
-
-export const ActionConstants = {
-    AUTH_FETCH_BLOG_PAGE: 'AUTH_FETCH_BLOG_PAGE'
-};
 
 // 需要 token 验证的请求
-function authFetch(token, history) {
-    fetch()
+export default function authFetch(dispatch, url, params, success, error, history) {
+    const token = localStorage.token;
+    if (!token) {
+        history.push('/login');
+        return null;
+    }
+    const _params = params;
+    _params.headers = Object.assign({}, params.headers, { auth: token });
+    return fetch(url, params)
         .then(response => response.json())
         .then((json) => {
-            if (json.code === 403) {
+            if (json.code === 401) {
                 history.push('/login');
+                dispatch(error(json));
+            } else {
+                dispatch(success(json));
             }
         })
-        .catch();
+        .catch(() => {
+            dispatch(error());
+        });
 }

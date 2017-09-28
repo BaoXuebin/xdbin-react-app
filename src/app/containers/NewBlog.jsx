@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Segment, Header, Icon, Divider, Button, Checkbox } from 'semantic-ui-react';
+import {
+    withRouter
+} from 'react-router-dom';
 
 import EditorAndPreview from '../components/EditorAndPreview';
 import TagPool from '../components/TagPool';
@@ -38,7 +41,7 @@ class NewBlog extends PureComponent {
                 content: this.content.getValue(),
                 ifPub: this.props.ifPub
             };
-            this.props.dispatch(submitBlogIfNeeded(blog));
+            this.props.dispatch(submitBlogIfNeeded(blog, this.props.history));
         }
     }
 
@@ -86,6 +89,7 @@ class NewBlog extends PureComponent {
 
 NewBlog.propTypes = {
     dispatch: PropTypes.func.isRequired,
+    history: PropTypes.shape().isRequired,
     ifPub: PropTypes.bool,
     errors: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectTags: PropTypes.arrayOf(PropTypes.object).isRequired
@@ -103,4 +107,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(NewBlog);
+export default withRouter(connect(mapStateToProps)(NewBlog));

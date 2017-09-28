@@ -23,6 +23,8 @@ const GlobalReducer = (state = initState, action) => {
             localStorage.removeItem('token');
             return Object.assign({}, state, { token: null });
         }
+        case ActionConstants.LOGOUT:
+            return Object.assign({}, state, { token: null });
         default:
             return state;
     }

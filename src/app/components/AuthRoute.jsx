@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Loader } from 'semantic-ui-react';
 import {
-    Route,
     withRouter
 } from 'react-router-dom';
 
@@ -32,9 +31,9 @@ class AuthRoute extends Component {
     render() {
         const CustomComponent = this.props.component;
         const { token, ...rest } = this.props;
-        this.isLogin = token;
+        this.isLogin = token !== null;
         return (
-            this.isLogin !== null ? (
+            this.isLogin ? (
                 <CustomComponent {...rest} />
             ) : (
                 <Loader active inline="centered" />

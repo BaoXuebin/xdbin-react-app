@@ -14,6 +14,24 @@ class Login extends Component {
         super(props);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
+        this.params = {
+            r: '/manager'
+        };
+    }
+
+    componentWillMount() {
+        const { location } = this.props;
+        const search = location.search;
+        const query = search.split(/[?&]/);
+        let kv = [];
+        if (query) {
+            query.forEach((q) => {
+                kv = q.split('=');
+                if (kv && kv.length === 2) {
+                    this.params[kv[0]] = kv[1];
+                }
+            });
+        }
     }
 
     handleLogin() {
@@ -67,7 +85,7 @@ class Login extends Component {
             );
         }
         return (
-            <Redirect to="/manager" />
+            <Redirect to={this.params.r} />
         );
     }
 }
@@ -76,7 +94,8 @@ Login.propTypes = {
     dispatch: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string,
-    token: PropTypes.string
+    token: PropTypes.string,
+    location: PropTypes.shape().isRequired
 };
 Login.defaultProps = {
     error: null,

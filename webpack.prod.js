@@ -1,10 +1,12 @@
 const path = require('path');
 const Merge = require('webpack-merge');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonConfig = require('./webpack.common.js');
 
 const ROOT_PATH = path.resolve(__dirname);
 const APP_PATH = path.resolve(ROOT_PATH, 'src/app');
+const BUILD_PATH = path.resolve(ROOT_PATH, 'dist/js');
 
 module.exports = Merge(CommonConfig, {
     entry: {
@@ -12,6 +14,10 @@ module.exports = Merge(CommonConfig, {
         moment: ['moment']
     },
     devtool: 'cheap-module-source-map',
+    output: {
+        path: BUILD_PATH,
+        publicPath: '/js/'
+    },
     plugins: [
         new webpack.LoaderOptionsPlugin({
             minimize: true,
@@ -21,6 +27,10 @@ module.exports = Merge(CommonConfig, {
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
+        }),
+        new HtmlWebpackPlugin({
+            filename: '../index.html',
+            template: path.resolve(ROOT_PATH, 'index.tpl.prod.html')
         }),
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
