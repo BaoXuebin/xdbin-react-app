@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import {
-    Button, Header, Input
+    Button, Header
 } from 'semantic-ui-react';
 import {
     withRouter
@@ -40,14 +40,7 @@ class Manager extends Component {
                 <Button content="Add" icon="add" color="green" labelPosition="left" onClick={() => history.push('/blog/add')} />
                 <BlogTable blogs={blogs} />
                 <Header as="h3" content="标签管理" />
-                <Input
-                    icon="tags"
-                    iconPosition="left"
-                    label={{ tag: true, content: '添加标签' }}
-                    labelPosition="right"
-                    placeholder="添加标签"
-                />
-                <TagPool />
+                <TagPool controllable history={history} />
             </div>
         );
     }

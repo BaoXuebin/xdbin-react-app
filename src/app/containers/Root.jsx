@@ -64,9 +64,10 @@ const ErrorPage = () => (
     </Layout>
 );
 
+//UA-107197856-1
 const Root = () => (
     <Provider store={configureStore()}>
-        <BrowserRouter id="UA-107197856-1">
+        <BrowserRouter id="UA">
             <div>
                 <Switch>
                     <Route exact path="/" component={Blog} />

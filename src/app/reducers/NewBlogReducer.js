@@ -12,7 +12,7 @@ const NewBlogReducer = (state = initState, action) => {
             return Object.assign({}, state, {
                 selectTags: [...state.selectTags, action.tag]
             });
-        case ActionConstants.DELETE_TAG: {
+        case ActionConstants.REMOVE_TAG: {
             const tag = action.tag;
             const selectTags = state.selectTags.filter(selectTag => selectTag.tagId !== tag.tagId);
             return Object.assign({}, state, { selectTags });

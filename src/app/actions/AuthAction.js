@@ -12,14 +12,17 @@ export default function authFetch(dispatch, url, params, success, error, history
     return fetch(url, params)
         .then(response => response.json())
         .then((json) => {
-            if (json.code === 401) {
+            if (json.status >= 400) {
+                dispatch(error());
+            } else if (json.code && json.code === 401) {
                 history.push('/login');
-                dispatch(error(json));
+                dispatch(error(json.error));
             } else {
                 dispatch(success(json));
             }
         })
-        .catch(() => {
+        .catch((e) => {
+            console.log(e);
             dispatch(error());
         });
 }

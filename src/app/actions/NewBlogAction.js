@@ -3,6 +3,7 @@ import authFetch from './AuthAction';
 
 export const ActionConstants = {
     SELECT_TAG: 'SELECT_TAG',
+    REMOVE_TAG: 'REMOVE_TAG',
     DELETE_TAG: 'DELETE_TAG',
     TOGGLE_PUB: 'TOGGLE_PUB',
     VALIDATE_ERROR: 'VALIDATE_ERROR',
@@ -14,6 +15,13 @@ export const ActionConstants = {
 export function selectTag(tag) {
     return {
         type: ActionConstants.SELECT_TAG,
+        tag
+    };
+}
+
+export function removeTag(tag) {
+    return {
+        type: ActionConstants.REMOVE_TAG,
         tag
     };
 }
