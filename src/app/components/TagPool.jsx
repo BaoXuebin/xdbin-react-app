@@ -120,7 +120,7 @@ class TagPool extends Component {
                         删除？
                     </Modal.Header>
                     <Modal.Content>
-                        <p>确定删除 {this.state.delTag.tagName} 标签？</p>
+                        <p>确定删除 <Icon name="tag" />「{this.state.delTag.tagName}」标签？</p>
                     </Modal.Content>
                     <Modal.Actions>
                         <Button negative onClick={this.closeModal}>

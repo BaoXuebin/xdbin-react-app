@@ -12,6 +12,12 @@ export default class TitleInput extends PureComponent {
         this.removeError = this.removeError.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.title && !this.title.inputRef.value) {
+            this.title.inputRef.value = nextProps.title;
+        }
+    }
+
     getValue() {
         return this.title.inputRef.value;
     }
@@ -57,9 +63,11 @@ export default class TitleInput extends PureComponent {
 
 TitleInput.propTypes = {
     errors: PropTypes.arrayOf(PropTypes.object).isRequired,
-    removeError: PropTypes.func
+    removeError: PropTypes.func,
+    title: PropTypes.string
 };
 TitleInput.defaultProps = {
     errors: [],
-    removeError: () => {}
+    removeError: () => {},
+    title: ''
 };

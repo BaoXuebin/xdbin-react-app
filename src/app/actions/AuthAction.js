@@ -1,9 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
+export const ActionConstants = {
+    INVALID_TOKEN: 'INVALID_TOKEN'
+};
+
 // 需要 token 验证的请求
 export default function authFetch(dispatch, url, params, success, error, history) {
     const token = localStorage.token;
     if (!token) {
+        dispatch({
+            type: ActionConstants.INVALID_TOKEN
+        });
         history.push('/login');
         return null;
     }
@@ -21,8 +28,7 @@ export default function authFetch(dispatch, url, params, success, error, history
                 dispatch(success(json));
             }
         })
-        .catch((e) => {
-            console.log(e);
+        .catch(() => {
             dispatch(error());
         });
 }

@@ -37,7 +37,9 @@ export function fetchTagIfNeed() {
         return fetch(FETCH_TAG_URL)
             .then(response => response.json())
             .then(json => dispatch(fetchTagSuccess(json)))
-            .catch(dispatch(fetchTagError()));
+            .catch(() => {
+                dispatch(fetchTagError());
+            });
     };
 }
 
@@ -90,9 +92,21 @@ function deleteTagSuccess(tag) {
     };
 }
 
+function deleteTagError(error) {
+    return {
+        type: ActionConstants.DELETE_TAG_ERROR,
+        error
+    };
+}
+
 export function deleteTagIfNeed(tag, history) {
-    const success = json => deleteTagSuccess(json);
-    const error = () => {};
+    const success = (json) => {
+        if (json.code) {
+            return deleteTagError(json.error);
+        }
+        return deleteTagSuccess(json);
+    };
+    const error = () => addTagError('请求服务器失败');
     return dispatch => authFetch(dispatch, DELETE_TAG_URL, {
         method: 'DELETE',
         headers: {

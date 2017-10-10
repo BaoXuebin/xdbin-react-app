@@ -25,6 +25,8 @@ const TagReducer = (state = initState, action) => {
             const tags = state.tags.filter(t => t.tagId !== action.tag.tagId);
             return Object.assign({}, state, { tags });
         }
+        case ActionConstants.DELETE_TAG_ERROR:
+            return Object.assign({}, state, { error: action.error });
         default:
             return state;
     }

@@ -36,6 +36,11 @@ class EditorAndPreview extends PureComponent {
         ];
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps.value, this.textarea.inputRef);
+        this.textarea.inputRef.value = nextProps.value;
+    }
+
     getValue() {
         return this.textarea.ref.value;
     }
@@ -97,13 +102,15 @@ EditorAndPreview.propTypes = {
     validate: PropTypes.shape(),
     errorKey: PropTypes.string.isRequired,
     removeError: PropTypes.func,
-    errors: PropTypes.arrayOf(PropTypes.object).isRequired
+    errors: PropTypes.arrayOf(PropTypes.object).isRequired,
+    value: PropTypes.string
 };
 EditorAndPreview.defaultProps = {
     rows: 3,
     validate: {},
     removeError: () => {},
-    errors: []
+    errors: [],
+    value: ''
 };
 
 export default EditorAndPreview;

@@ -1,4 +1,4 @@
-import { SUBMIT_BLOG_URL } from '../data/Urls';
+import { SUBMIT_BLOG_URL, FETCH_UPDATE_BLOG_URL } from '../data/Urls';
 import authFetch from './AuthAction';
 
 export const ActionConstants = {
@@ -9,8 +9,17 @@ export const ActionConstants = {
     VALIDATE_ERROR: 'VALIDATE_ERROR',
     REMOVE_ERROR: 'REMOVE_ERROR',
     SUBMIT_BLOG: 'SUBMIT_BLOG',
-    SUBMIT_BLOG_SUCCESS: 'SUBMIT_BLOG_SUCCESS'
+    SUBMIT_BLOG_SUCCESS: 'SUBMIT_BLOG_SUCCESS',
+    REMOVE_SUBMIT_BLOG_SUCCESS: 'REMOVE_SUBMIT_BLOG_SUCCESS',
+    FETCH_UPDATE_BLOG_SUCCESS: 'FETCH_UPDATE_BLOG_SUCCESS',
+    FETCH_UPDATE_BLOG_ERROR: 'FETCH_UPDATE_BLOG_ERROR'
 };
+
+export function removeSuccessLabel() {
+    return {
+        type: ActionConstants.REMOVE_SUBMIT_BLOG_SUCCESS
+    };
+}
 
 export function selectTag(tag) {
     return {
@@ -66,9 +75,22 @@ function submitBlogSuccess() {
     };
 }
 
+function fetchUpdateBlogSuccess(blog) {
+    return {
+        type: ActionConstants.FETCH_UPDATE_BLOG_SUCCESS,
+        blog
+    };
+}
+
+function fetchUpdateBlogError() {
+    return {
+        type: ActionConstants.FETCH_UPDATE_BLOG_ERROR
+    };
+}
+
 export function submitBlogIfNeeded(blog, history) {
     return (dispatch) => {
-        dispatch(submitBlog);
+        dispatch(submitBlog());
         const params = {
             method: 'POST',
             headers: {
@@ -81,4 +103,14 @@ export function submitBlogIfNeeded(blog, history) {
         const error = () => {};
         return authFetch(dispatch, SUBMIT_BLOG_URL, params, success, error, history);
     };
+}
+
+export function fetchUpdateBlogByIdIfNeed(blogId, history) {
+    const success = json => fetchUpdateBlogSuccess(json);
+    const error = () => fetchUpdateBlogError();
+    return dispatch => authFetch(dispatch,
+        `${FETCH_UPDATE_BLOG_URL}/${blogId}`,
+        { method: 'GET' },
+        success, error, history
+    );
 }

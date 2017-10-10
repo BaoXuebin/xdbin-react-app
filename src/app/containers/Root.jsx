@@ -1,16 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
+    BrowserRouter,
     Route,
     Switch
 } from 'react-router-dom';
-import { BrowserRouter } from 'react-g-analytics';
+// import { BrowserRouter } from 'react-g-analytics';
 
 import '../../../static/styles/main.less';
 import configureStore from '../stores/ConfigureStore';
 import Layout from './Layout';
 import Bundle from '../components/Bundle';
 import AuthRoute from '../components/AuthRoute';
+import Login from './Login';
 
 // const Layout = () => import('./Blog');
 
@@ -38,14 +40,22 @@ const NewBlog = () => (
     </Layout>
 );
 
-// 登录页面
-const Login = () => (
+const UpdateBlog = ({ match }) => (
     <Layout>
-        <Bundle load={() => import('./Login')}>
-            {Login => <Login />}
+        <Bundle load={() => import('./NewBlog')}>
+            {NewBlog => <NewBlog update={true} match={match} />}
         </Bundle>
     </Layout>
 );
+
+// 登录页面
+// const Login = () => (
+//     <Layout>
+//         <Bundle load={() => import('./Login')}>
+//             {Login => <Login />}
+//         </Bundle>
+//     </Layout>
+// );
 
 // 管理页面
 const Manager = () => (
@@ -71,10 +81,15 @@ const Root = () => (
             <div>
                 <Switch>
                     <Route exact path="/" component={Blog} />
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/login" render={() => (
+                            <Layout>
+                                <Login />
+                            </Layout>
+                        )} />
                     <Route exact path="/blog" component={Blog} />
                     <AuthRoute path="/manager" component={Manager} />
                     <AuthRoute path="/blog/add" component={NewBlog} />
+                    <AuthRoute path="/blog/update/:id" component={UpdateBlog} />
                     <Route path="/blog/:id" render={({ match }) => <BlogDetail match={match} />} />
                     <Route component={ErrorPage} />
                 </Switch>

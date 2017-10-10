@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Loader } from 'semantic-ui-react';
 import {
-    withRouter
+    withRouter,
+    Route
 } from 'react-router-dom';
 
 import { validate } from '../actions/GlobalAction';
@@ -33,11 +34,16 @@ class AuthRoute extends Component {
         const { token, ...rest } = this.props;
         this.isLogin = token !== null;
         return (
-            this.isLogin ? (
-                <CustomComponent {...rest} />
-            ) : (
-                <Loader active inline="centered" />
-            )
+            <Route
+                {...rest}
+                render={props => (
+                    this.isLogin ? (
+                        <CustomComponent {...props} />
+                    ) : (
+                        <Loader active inline="centered" />
+                    )
+                )}
+            />
         );
     }
 }
