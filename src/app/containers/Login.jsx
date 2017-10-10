@@ -52,8 +52,9 @@ class Login extends Component {
     }
 
     render() {
-        const { loading, error, token } = this.props;
+        const { token } = this.props;
         if (token === null) {
+            const { loading, error } = this.props;
             return (
                 <div style={{ width: '260px', margin: '12% auto', marginBottom: '25%', textAlign: 'center' }}>
                     <Input

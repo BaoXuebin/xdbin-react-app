@@ -30,8 +30,8 @@ class AuthRoute extends Component {
     }
 
     render() {
-        const CustomComponent = this.props.component;
-        const { token, ...rest } = this.props;
+        const { token, component, ...rest } = this.props;
+        const CustomComponent = component;
         this.isLogin = token !== null;
         return (
             <Route

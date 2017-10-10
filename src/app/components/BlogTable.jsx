@@ -122,7 +122,7 @@ BlogTr.propTypes = {
 };
 
 BlogTable.propTypes = {
-    blogs: PropTypes.arrayOf(),
+    blogs: PropTypes.arrayOf(PropTypes.shape()),
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.shape()
 };

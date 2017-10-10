@@ -1,18 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
-    BrowserRouter,
+    // BrowserRouter,
     Route,
     Switch
 } from 'react-router-dom';
-// import { BrowserRouter } from 'react-g-analytics';
+import { BrowserRouter } from 'react-g-analytics';
 
 import '../../../static/styles/main.less';
 import configureStore from '../stores/ConfigureStore';
 import Layout from './Layout';
 import Bundle from '../components/Bundle';
 import AuthRoute from '../components/AuthRoute';
-import Login from './Login';
+// import Login from './Login';
 
 // const Layout = () => import('./Blog');
 
@@ -49,13 +49,13 @@ const UpdateBlog = ({ match }) => (
 );
 
 // 登录页面
-// const Login = () => (
-//     <Layout>
-//         <Bundle load={() => import('./Login')}>
-//             {Login => <Login />}
-//         </Bundle>
-//     </Layout>
-// );
+const Login = () => (
+    <Layout>
+        <Bundle load={() => import('./Login')}>
+            {Login => <Login />}
+        </Bundle>
+    </Layout>
+);
 
 // 管理页面
 const Manager = () => (
@@ -77,15 +77,11 @@ const ErrorPage = () => (
 //UA-107197856-1
 const Root = () => (
     <Provider store={configureStore()}>
-        <BrowserRouter id="UA">
+        <BrowserRouter id="UA-107197856-1">
             <div>
                 <Switch>
                     <Route exact path="/" component={Blog} />
-                    <Route exact path="/login" render={() => (
-                            <Layout>
-                                <Login />
-                            </Layout>
-                        )} />
+                    <Route exact path="/login" component={Login} />
                     <Route exact path="/blog" component={Blog} />
                     <AuthRoute path="/manager" component={Manager} />
                     <AuthRoute path="/blog/add" component={NewBlog} />

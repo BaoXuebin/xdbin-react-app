@@ -70,7 +70,7 @@ class Manager extends Component {
 
 Manager.propTypes = {
     page: PropTypes.number.isRequired,
-    blogs: PropTypes.arrayOf({}),
+    blogs: PropTypes.arrayOf(PropTypes.shape()),
     error: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.shape().isRequired
