@@ -12,7 +12,7 @@ import configureStore from '../stores/ConfigureStore';
 import Layout from './Layout';
 import Bundle from '../components/Bundle';
 import AuthRoute from '../components/AuthRoute';
-// import Login from './Login';
+import Login from './Login';
 
 // const Layout = () => import('./Blog');
 
@@ -49,13 +49,13 @@ const UpdateBlog = ({ match }) => (
 );
 
 // 登录页面
-const Login = () => (
-    <Layout>
-        <Bundle load={() => import('./Login')}>
-            {Login => <Login />}
-        </Bundle>
-    </Layout>
-);
+// const Login = () => (
+//     <Layout>
+//         <Bundle load={() => import('./Login')}>
+//             {Login => <Login />}
+//         </Bundle>
+//     </Layout>
+// );
 
 // 管理页面
 const Manager = () => (
@@ -81,7 +81,7 @@ const Root = () => (
             <div>
                 <Switch>
                     <Route exact path="/" component={Blog} />
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/login" render={() => <Layout><Login /></Layout> } />
                     <Route exact path="/blog" component={Blog} />
                     <AuthRoute path="/manager" component={Manager} />
                     <AuthRoute path="/blog/add" component={NewBlog} />

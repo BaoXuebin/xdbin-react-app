@@ -40,6 +40,8 @@ const NewBlogReducer = (state = initState, action) => {
         }
         case ActionConstants.REMOVE_SUBMIT_BLOG_SUCCESS:
             return Object.assign({}, state, { updateSuccess: false });
+        case ActionConstants.INIT_NEW_BLOG_DATA:
+            return initState;
         default:
             return state;
     }

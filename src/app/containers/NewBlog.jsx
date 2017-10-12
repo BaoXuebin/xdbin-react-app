@@ -11,12 +11,23 @@ import ErrorLabel from '../components/ErrorLabel';
 import TagPool from '../components/TagPool';
 import TitleInput from '../components/TitleInput';
 import { fetchTagIfNeed } from '../actions/TagAction';
-import { togglePub, validateFormError, removeError, submitBlogIfNeeded, fetchUpdateBlogByIdIfNeed, removeSuccessLabel } from '../actions/NewBlogAction';
+import {
+    togglePub,
+    validateFormError,
+    removeError,
+    submitBlogIfNeeded,
+    fetchUpdateBlogByIdIfNeed,
+    removeSuccessLabel,
+    initNewBlogData
+} from '../actions/NewBlogAction';
 
 class NewBlog extends PureComponent {
     constructor(props) {
         super(props);
         this.blogId = null;
+        this.updateBlog = {};
+        this.toastText = '添加成功';
+        this.headerTitle = '新建博客';
         this.togglePub = this.togglePub.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.removeError = this.removeError.bind(this);
@@ -28,6 +39,9 @@ class NewBlog extends PureComponent {
         this.blogId = match.params.id;
         if (this.props.update) {
             this.props.dispatch(fetchUpdateBlogByIdIfNeed(this.blogId));
+        } else {
+            // 初始化 state 中的博客数据
+            this.props.dispatch(initNewBlogData());
         }
     }
 
@@ -41,7 +55,7 @@ class NewBlog extends PureComponent {
         if (errors && errors.length > 0) {
             this.props.dispatch(validateFormError(errors));
         } else {
-            const updateBlog = this.props.updateBlog;
+            const updateBlog = this.props.update ? this.props.updateBlog : null;
             const tags = this.props.selectTags.map(tag => tag.tagId).join(',');
             const blog = {
                 title: this.title.getValue(),
@@ -64,13 +78,16 @@ class NewBlog extends PureComponent {
     }
 
     render() {
-        const { ifPub, errors, update, updateBlog, loading, updateSuccess } = this.props;
+        const { ifPub, errors, update, loading, updateSuccess } = this.props;
+        const updateBlog = update ? this.props.updateBlog : {};
+        const toastText = update ? '修改成功' : '添加成功';
+        const headerTitle = update ? '修改博客' : '新建博客';
         return (
             <Container>
                 <Header as="h2">
                     <Icon name="pencil" />
                     <Header.Content>
-                        { update ? '修改博客' : '新建博客' }
+                        {headerTitle}
                     </Header.Content>
                 </Header>
                 <Divider />
@@ -104,7 +121,7 @@ class NewBlog extends PureComponent {
                 <Divider />
                 <Button color="blue" onClick={() => this.props.history.push('/manager')}>返回</Button>
                 <Button color="green" disabled={loading} loading={loading} onClick={this.handleSubmit}>提交</Button>
-                { updateSuccess && <ErrorLabel color="green" error="修改成功" delayCallBack={removeSuccessLabel} /> }
+                <ErrorLabel color="green" error={updateSuccess ? toastText : null} delayCallBack={removeSuccessLabel} />
                 {
                     loading &&
                         <Dimmer active inverted>

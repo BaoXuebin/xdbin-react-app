@@ -12,8 +12,15 @@ export const ActionConstants = {
     SUBMIT_BLOG_SUCCESS: 'SUBMIT_BLOG_SUCCESS',
     REMOVE_SUBMIT_BLOG_SUCCESS: 'REMOVE_SUBMIT_BLOG_SUCCESS',
     FETCH_UPDATE_BLOG_SUCCESS: 'FETCH_UPDATE_BLOG_SUCCESS',
-    FETCH_UPDATE_BLOG_ERROR: 'FETCH_UPDATE_BLOG_ERROR'
+    FETCH_UPDATE_BLOG_ERROR: 'FETCH_UPDATE_BLOG_ERROR',
+    INIT_NEW_BLOG_DATA: 'INIT_NEW_BLOG_DATA'
 };
+
+export function initNewBlogData() {
+    return {
+        type: ActionConstants.INIT_NEW_BLOG_DATA
+    };
+}
 
 export function removeSuccessLabel() {
     return {

@@ -8,7 +8,6 @@ import {
 class ErrorLabel extends PureComponent {
     componentWillReceiveProps() {
         const { delay, delayCallBack, dispatch } = this.props;
-        console.log(delay, delayCallBack, dispatch);
         if (delayCallBack) {
             setTimeout(() => dispatch(delayCallBack()), delay);
         } else {
