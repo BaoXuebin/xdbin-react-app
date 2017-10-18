@@ -66,6 +66,14 @@ const Manager = () => (
     </Layout>
 );
 
+const Lab = () => (
+    <Layout>
+        <Bundle load={() => import('./Lab')}>
+            {Lab => <Lab />}
+        </Bundle>
+    </Layout>
+);
+
 const ErrorPage = () => (
     <Layout>
         <Bundle load={() => import('./ErrorPage')}>
@@ -83,6 +91,7 @@ const Root = () => (
                     <Route exact path="/" component={Blog} />
                     <Route exact path="/login" render={() => <Layout><Login /></Layout> } />
                     <Route exact path="/blog" component={Blog} />
+                    <Route exact path="/lab" component={Lab} />
                     <AuthRoute path="/manager" component={Manager} />
                     <AuthRoute path="/blog/add" component={NewBlog} />
                     <AuthRoute path="/blog/update/:id" component={UpdateBlog} />

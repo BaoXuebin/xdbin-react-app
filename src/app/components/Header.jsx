@@ -29,6 +29,12 @@ function Head(props) {
                     </Grid.Column>
                     <Grid.Column textAlign="right">
                         <Popup
+                            trigger={<Link to="/lab" style={{ color: 'black' }}><Icon name="lab" inverted={ifNight} size="large" /></Link>}
+                            content="「实验室」"
+                            on="hover"
+                        />
+                        {'  '}
+                        <Popup
                             trigger={<a href={WEIBO_URL} style={{ color: 'black' }}><Icon name="weibo" inverted={ifNight} size="large" /></a>}
                             content="@不经意的你"
                             on="hover"
