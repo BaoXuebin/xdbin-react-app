@@ -82,6 +82,12 @@ const ErrorPage = () => (
     </Layout>
 );
 
+const Player = () => (
+    <Bundle load={() => import('../lab/player/Player')}>
+        {Player => <Player />}
+    </Bundle>
+);
+
 //UA-107197856-1
 const Root = () => (
     <Provider store={configureStore()}>
@@ -92,6 +98,7 @@ const Root = () => (
                     <Route exact path="/login" render={() => <Layout><Login /></Layout> } />
                     <Route exact path="/blog" component={Blog} />
                     <Route exact path="/lab" component={Lab} />
+                    <Route exact path="/lab/player" component={Player} />
                     <AuthRoute path="/manager" component={Manager} />
                     <AuthRoute path="/blog/add" component={NewBlog} />
                     <AuthRoute path="/blog/update/:id" component={UpdateBlog} />

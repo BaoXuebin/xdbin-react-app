@@ -1,22 +1,34 @@
 import React from 'react';
-import { Image, Card, Icon } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Card, Icon, Image } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
-const LabCard = () => (
-    <Card style={{ marginBottom: '1.5rem', textAlign: 'left' }}>
-        <Image src="http://oxrjqkvly.bkt.clouddn.com/atom_2x.png" />
-        <Card.Content>
-            <Card.Header>
-                博客
-            </Card.Header>
-            <Card.Description>
-                Code the Heart.
-            </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-            <Icon name="code" />
-            10.17.2017
-        </Card.Content>
-    </Card>
-);
+const LabCard = ({ data }) => {
+    const _icons = data.icon.map(icon => <Icon key={icon} name={icon} style={{ fontSize: '1.3rem' }} />);
+    return (
+        <Card>
+            <Link to={data.route}>
+                <Card style={{ textAlign: 'left' }}>
+                    { data.image && <Image src={data.image} /> }
+                    <Card.Content>
+                        <Card.Header>
+                            {data.title}
+                        </Card.Header>
+                        <Card.Description>
+                            {data.description}
+                        </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                        { _icons }
+                    </Card.Content>
+                </Card>
+            </Link>
+        </Card>
+    );
+};
+
+LabCard.propTypes = {
+    data: PropTypes.shape().isRequired
+};
 
 export default LabCard;
