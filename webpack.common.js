@@ -26,22 +26,25 @@ module.exports = {
         new CleanWebpackPlugin(['dist']),
         new ExtractTextPlugin('css/xdbin.style.css'),
         new webpack.optimize.CommonsChunkPlugin({
-            name: [].reverse()
+            name: 'common'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest' // 用于提取manifest
         }),
         // html 模板
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.resolve(ROOT_PATH, 'index.tpl.html')
         }),
-        // 热更新
+        // 热更新，生产环境打包需注释
         new webpack.HotModuleReplacementPlugin(),
         // 保证出错时，页面不阻塞；且会在编译结束后报错
         new webpack.NoEmitOnErrorsPlugin()
     ],
     output: {
         path: BUILD_PATH,
-        filename: '[name].[hash:6].bundle.js',
-        chunkFilename: '[name].[hash:6].bundle.js',
+        filename: '[name].[chunkhash:6].bundle.js',
+        chunkFilename: '[name].[chunkhash:6].bundle.js',
         publicPath: '/',
         sourceMapFilename: '[name].map'
     },
