@@ -6,13 +6,19 @@ class BackTop extends React.Component {
         super(props);
         this.clientHeight = document.body.clientHeight;
         this.scrollHeight = document.body.scrollHeight;
+        this.scrollTop = 0;
         this.state = { show: false };
     }
 
     componentDidMount() {
         window.onscroll = () => {
             this.scrollHeight = document.body.scrollHeight;
-            this.ifShow(document.body.scrollTop);
+            if (document.documentElement && document.documentElement.scrollTop) {
+                this.scrollTop = document.documentElement.scrollTop;
+            } else {
+                this.scrollTop = document.body.scrollTop;
+            }
+            this.ifShow(this.scrollTop);
         };
     }
 
@@ -35,8 +41,7 @@ class BackTop extends React.Component {
         const scrolldelay = setTimeout(() => {
             this.backTop();
         }, 20);
-        const sTop = document.body.scrollTop;
-        if (sTop <= 0) clearTimeout(scrolldelay);
+        if (this.scrollTop <= 0) clearTimeout(scrolldelay);
     }
 
     render() {

@@ -8,7 +8,7 @@ import '../styles/header.less';
 
 function TopHeader() {
     return (
-        <Segment>
+        <Segment id="playerHeader">
             <Container>
                 <Grid columns={2}>
                     <Grid.Column>

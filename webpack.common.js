@@ -43,8 +43,8 @@ module.exports = {
     ],
     output: {
         path: BUILD_PATH,
-        filename: '[name].[chunkhash:6].bundle.js',
-        chunkFilename: '[name].[chunkhash:6].bundle.js',
+        filename: '[name].[hash:6].bundle.js',
+        chunkFilename: '[name].[hash:6].bundle.js',
         publicPath: '/',
         sourceMapFilename: '[name].map'
     },

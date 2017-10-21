@@ -1,0 +1,22 @@
+img.cover {
+    width: 320px;
+    height: 320px;
+    margin: .5rem auto;
+    margin-top: 2rem;
+
+    animation: rotate 30s linear infinite;
+}
+
+img.pause {
+    animation-play-state: paused;
+    -webkit-animation-play-state: paused; /* Safari 和 Chrome */
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
