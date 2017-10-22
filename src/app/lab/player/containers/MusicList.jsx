@@ -1,41 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { List, Header, Icon } from 'semantic-ui-react';
 
 import MusicListItem from '../components/MusicListItem';
 import '../styles/musiclist.less';
 
-const buildItems = () => {
-    const currentMusicId = 2;
-    const musics = [
-        {
-            id: 1,
-            song: '山阴路的夏天',
-            singer: '李志'
-        },
-        {
-            id: 2,
-            song: '梵高先生',
-            singer: '李志'
-        }
-    ];
-    return musics.map((m) => {
-        const current = m.id === currentMusicId;
-        return <MusicListItem key={m.id} current={current} music={m} />;
+const MusicList = ({ musicId, musics, onClickItem }) => {
+    const _html = musics.map((m) => {
+        const current = m.id === musicId;
+        return <MusicListItem key={m.id} current={current} music={m} onClickItem={onClickItem} />;
     });
+    return (
+        <div className="musiclist-container">
+            <Header dividing>
+                <Header.Content>
+                    <span className="updateTime">歌单更新于</span>
+                    <Icon className="refreshBtn" name="refresh" />
+                </Header.Content>
+            </Header>
+            <List divided relaxed celled animated verticalAlign="middle">
+                {_html}
+            </List>
+        </div>
+    );
 };
 
-const MusicList = () => (
-    <div className="musiclist-container">
-        <Header dividing>
-            <Header.Content>
-                <span className="updateTime">歌单更新于</span>
-                <Icon className="refreshBtn" name="refresh" />
-            </Header.Content>
-        </Header>
-        <List divided relaxed celled animated verticalAlign="middle">
-            {buildItems()}
-        </List>
-    </div>
-);
+MusicList.propTypes = {
+    musicId: PropTypes.string.isRequired,
+    musics: PropTypes.arrayOf(PropTypes.shape()),
+    onClickItem: PropTypes.func.isRequired
+};
+MusicList.defaultProps = {
+    musics: []
+};
 
 export default MusicList;

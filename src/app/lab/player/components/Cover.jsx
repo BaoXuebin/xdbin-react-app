@@ -11,7 +11,10 @@ const Cover = ({ src }) => (
 );
 
 Cover.propTypes = {
-    src: PropTypes.string.isRequired
+    src: PropTypes.string
+};
+Cover.defaultProps = {
+    src: ''
 };
 
 export default Cover;

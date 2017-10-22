@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Progress } from 'semantic-ui-react';
 
 // offsetX 水平偏移量, 百分百或字符串
-const ProgressBar = ({ offsetX }) => {
-    const style = { marginTop: '15px', marginLeft: offsetX };
-    return <Progress percent={10} size="tiny" color="red" style={style} />;
-};
+class ProgressBar extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.handleChangeProgress = this.handleChangeProgress.bind(this);
+    }
+
+    handleChangeProgress(e) {
+        const clkProgress =
+            (e.clientX - this.progress.getBoundingClientRect().left) / this.progress.clientWidth;
+        this.props.onChangeProgress(clkProgress);
+    }
+
+    render() {
+        const { offsetX, percent } = this.props;
+        const style = { marginTop: '15px', marginLeft: offsetX, cursor: 'pointer' };
+        return (
+            <div
+                className="ui red tiny progress"
+                data-percent={percent * 100}
+                style={style}
+                ref={(progress) => { this.progress = progress; }}
+                onClick={this.handleChangeProgress}
+            >
+                <div className="bar" style={{ width: `${percent * 100}%`, minWidth: 0 }} />
+            </div>
+        );
+    }
+}
 
 ProgressBar.propTypes = {
-    offsetX: PropTypes.string
+    offsetX: PropTypes.string,
+    percent: PropTypes.number,
+    onChangeProgress: PropTypes.func
 };
 ProgressBar.defaultProps = {
-    offsetX: 0
+    offsetX: '0',
+    percent: 0,
+    onChangeProgress: () => {}
 };
 
 export default ProgressBar;
