@@ -8,10 +8,17 @@ import {
 } from 'react-router-dom';
 
 import { GITHUB_URL, WEIBO_URL } from '../data/Urls';
-import { toggleTheme, logout } from '../actions/GlobalAction';
+import { toggleTheme, logout, validate } from '../actions/GlobalAction';
 
 function Head(props) {
-    const { text, theme, dispatch, history, token } = props;
+    const { theme, dispatch, history, token } = props;
+    // 验证是否是登录状态
+    if (!token) {
+        const localToken = localStorage.token;
+        if (localToken) {
+            dispatch(validate(localToken));
+        }
+    }
     const handleToggleTheme = () => {
         dispatch(toggleTheme(theme));
     };
@@ -21,13 +28,22 @@ function Head(props) {
     };
     const ifNight = theme === 'night';
     return (
-        <Segment color={ifNight ? 'black' : 'green'} inverted={ifNight}>
+        <Segment color={ifNight ? 'black' : 'green'} inverted={ifNight} style={{ borderRadius: 0 }}>
             <Container>
                 <Grid columns={2}>
                     <Grid.Column>
-                        <Link to="/"><h2 style={{ color: ifNight ? 'white' : 'black' }}>{text}</h2></Link>
+                        <Link to="/">
+                            <img style={{ margin: '-6px' }} src="http://oxrjqkvly.bkt.clouddn.com/xdbin_logo.png" alt="xdbin" />
+                        </Link>
                     </Grid.Column>
                     <Grid.Column textAlign="right">
+                        { token !== null &&
+                            <Popup
+                                trigger={<Link to="/manager" style={{ color: 'green' }}><Icon name="anchor" inverted={ifNight} size="large" /></Link>}
+                                content="「后台管理」"
+                                on="hover"
+                            />
+                        }
                         <Popup
                             trigger={<Link to="/lab" style={{ color: 'black' }}><Icon name="lab" inverted={ifNight} size="large" /></Link>}
                             content="「实验室」"
@@ -62,7 +78,6 @@ function Head(props) {
 
 Head.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    text: PropTypes.string,
     theme: PropTypes.string.isRequired,
     history: PropTypes.shape().isRequired,
     token: PropTypes.string

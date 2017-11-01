@@ -25,8 +25,10 @@ const GlobalReducer = (state = initState, action) => {
         }
         case ActionConstants.INVALID_TOKEN:
             return Object.assign({}, state, { token: null });
-        case ActionConstants.LOGOUT:
+        case ActionConstants.LOGOUT: {
+            localStorage.removeItem('token');
             return Object.assign({}, state, { token: null });
+        }
         default:
             return state;
     }

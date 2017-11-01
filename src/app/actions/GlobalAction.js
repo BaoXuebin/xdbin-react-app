@@ -58,7 +58,9 @@ export function validate(token, history) {
         .then(response => response.json())
         .then((json) => {
             if (json.code === 401) {
-                history.push('/login');
+                if (history) {
+                    history.push('/login');
+                }
                 dispatch(validateError());
             } else {
                 dispatch(validateSuccess(token));
