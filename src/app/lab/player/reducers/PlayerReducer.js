@@ -13,6 +13,7 @@ const musics = [
     }
 ];
 const initState = {
+    play: false, // 是否正在播放音乐，默认不播放
     slideOpen: false, // 侧边栏默认关闭
     musics, // 播放列表
     musicId: musics[0].id, // 当前播放的音乐id
@@ -30,6 +31,9 @@ const PlayerReducer = (state = initState, action) => {
             return Object.assign({}, state, { playProgress: action.playProgress });
         case PlayerActionConstants.CHANGE_VOLUME_PROGRESS:
             return Object.assign({}, state, { volumeProgress: action.volumeProgress });
+        case PlayerActionConstants.PLAY_MUSIC:
+        case PlayerActionConstants.PAUSE_MUSIC:
+            return Object.assign({}, state, { play: !state.play });
         default:
             return state;
     }
