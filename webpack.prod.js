@@ -33,8 +33,8 @@ module.exports = {
         }),
         // html 模板
         new HtmlWebpackPlugin({
-            filename: './index.html',
-            template: path.resolve(ROOT_PATH, 'index.tpl.html')
+            filename: '../index.html',
+            template: path.resolve(ROOT_PATH, 'index.tpl.prod.html')
         }),
         // 保证出错时，页面不阻塞；且会在编译结束后报错
         new webpack.NoEmitOnErrorsPlugin(),
