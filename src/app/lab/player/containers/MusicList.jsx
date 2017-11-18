@@ -14,8 +14,7 @@ const MusicList = ({ musicId, musics, onClickItem }) => {
         <div className="musiclist-container">
             <Header dividing>
                 <Header.Content>
-                    <span className="updateTime">歌单更新于</span>
-                    <Icon className="refreshBtn" name="refresh" />
+                    <span className="updateTime">歌单列表</span>
                 </Header.Content>
             </Header>
             <List divided relaxed celled animated verticalAlign="middle">

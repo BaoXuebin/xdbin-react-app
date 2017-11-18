@@ -30,7 +30,7 @@ class Content extends Component {
     }
 
     render() {
-        const { slideOpen, musicId, musics } = this.props;
+        const { slideOpen, musicId, musics, play } = this.props;
         const music = Utils.get(musicId, musics);
         return (
             <div id="playerContent" style={{ marginTop: '-1rem' }}>
@@ -42,7 +42,7 @@ class Content extends Component {
                         <Grid textAlign="center">
                             <Grid.Row>
                                 <Grid.Column>
-                                    <Cover />
+                                    <Cover src={music.cover} play={play} />
                                 </Grid.Column>
                             </Grid.Row>
                             <Grid.Row>
@@ -62,7 +62,8 @@ Content.propTypes = {
     dispatch: PropTypes.func.isRequired,
     slideOpen: PropTypes.bool.isRequired,
     musicId: PropTypes.string.isRequired,
-    musics: PropTypes.arrayOf(PropTypes.shape())
+    musics: PropTypes.arrayOf(PropTypes.shape()),
+    play: PropTypes.bool.isRequired
 };
 Content.defaultProps = {
     musics: []
@@ -71,7 +72,8 @@ Content.defaultProps = {
 const mapStateToProps = state => ({
     slideOpen: state.Player.slideOpen,
     musicId: state.Player.musicId,
-    musics: state.Player.musics
+    musics: state.Player.musics,
+    play: state.Player.play
 });
 
 export default connect(mapStateToProps)(Content);
