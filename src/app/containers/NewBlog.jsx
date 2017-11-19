@@ -105,7 +105,7 @@ class NewBlog extends PureComponent {
                     ref={(summary) => { this.summary = summary; }}
                     errorKey="summary"
                     errors={errors}
-                    validate={{ nullable: false, maxLength: 1000 }}
+                    validate={{ maxLength: 1000 }}
                 />
                 <Divider />
                 <Header as="h3" content="博客内容" />
