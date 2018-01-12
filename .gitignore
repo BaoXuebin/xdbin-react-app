@@ -1,3 +1,5 @@
 /*
 !dist/
 !.gitignore
+ .babelrc
+ .eslintrc.js
