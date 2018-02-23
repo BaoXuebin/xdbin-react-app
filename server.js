@@ -4,6 +4,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.common.js');
 const webpack = require('webpack');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const proxy = require('express-http-proxy');
 
 const app = new express();
 // 监听端口
@@ -11,6 +12,8 @@ const port = 3000;
 
 app.use('/', connectHistoryApiFallback());
 app.use('/', express.static('dist'));
+app.use('/api', proxy('https://xdbin.com/'));
+// app.use('/api', proxy('http://localhost:8080'));
 app.use('/static', express.static('static'));
 
 if (process.env.NODE_ENV !== 'production') {

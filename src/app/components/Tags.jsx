@@ -15,7 +15,7 @@ const Tags = ({ tags }) => {
                 <div className="tag">
                     # 标签
                 </div>
-                {tags.map(tag => <Tag key={tag} tag={tag} />)}
+                {tags.map(tag => <Tag key={tag.tagId} tag={tag.tagName} />)}
             </div>
         );
     }
@@ -29,7 +29,7 @@ Tag.propTypes = {
 };
 
 Tags.propTypes = {
-    tags: PropTypes.arrayOf(PropTypes.string)
+    tags: PropTypes.arrayOf(PropTypes.shape())
 };
 Tags.defaultProps = {
     tags: []
