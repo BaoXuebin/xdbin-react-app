@@ -12,7 +12,7 @@ const port = 3000;
 
 app.use('/', connectHistoryApiFallback());
 app.use('/', express.static('dist'));
-app.use('/api', proxy('https://xdbin.com/'));
+app.use('/api', proxy('http://v1.xdbin.com/'));
 // app.use('/api', proxy('http://localhost:8080'));
 app.use('/static', express.static('static'));
 
