@@ -16,7 +16,7 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     output: {
         path: BUILD_PATH,
-        publicPath: '/js/',
+        publicPath: '../js/',
         filename: '[name].[chunkhash:6].bundle.js',
         chunkFilename: '[name].[chunkhash:6].bundle.js',
         sourceMapFilename: '[name].map'
