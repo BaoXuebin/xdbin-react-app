@@ -15,6 +15,34 @@ export default class Net {
             fetch(url, _headers)
                 .then(res => res.json())
                 .then((result) => {
+                    if (!result.code || result.code > 200) {
+                        // 请求出现错误
+                        reject(result);
+                    }
+                    resolve(result);
+                }).catch((e) => {
+                    reject(e);
+                });
+        });
+    }
+
+    static authFetch(url, cookie, headers) {
+        let _headers = headers;
+        return new Promise((resolve, reject) => {
+            if (!cookie && cookie.indexOf('x-token') < 0) {
+                reject();
+            }
+            // 默认 header
+            const _defaultHeaders = {
+                credentials: 'include', // 添加 cookie
+                headers: {
+                    Cookie: cookie
+                }
+            };
+            _headers = Object.assign({}, _defaultHeaders, headers);
+            fetch(url, _headers)
+                .then(res => res.json())
+                .then((result) => {
                     if (result.code && result.code > 200) {
                         // 请求出现错误
                         reject(result);

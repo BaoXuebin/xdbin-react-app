@@ -10,5 +10,6 @@ export default Object.assign({
     // 网站名称
     website: 'xdbin',
     defaultTitle: '陆止于此，海始于斯。',
-    neteaseApi: '/netease/'
+    neteaseApi: '/netease/',
+    theme: 'red'
 }, Config);
