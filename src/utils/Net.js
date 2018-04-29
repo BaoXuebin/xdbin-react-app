@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import { nologin } from './Req';
 
 export default class Net {
     // 封装 fetch 请求
@@ -15,8 +16,11 @@ export default class Net {
             fetch(url, _headers)
                 .then(res => res.json())
                 .then((result) => {
-                    if (!result.code || result.code > 200) {
+                    if (result.code && result.code > 200) {
                         // 请求出现错误
+                        reject(result);
+                    } else if (result.code === 401) {
+                        nologin();
                         reject(result);
                     }
                     resolve(result);

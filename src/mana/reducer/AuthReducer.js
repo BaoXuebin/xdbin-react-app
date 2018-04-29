@@ -1,4 +1,4 @@
-import { AuthActionTypes } from '../action/LoginAction';
+import { AuthActionTypes } from '../action/AuthAction';
 
 const initState = {
     user: null

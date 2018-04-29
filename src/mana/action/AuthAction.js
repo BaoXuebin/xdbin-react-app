@@ -4,7 +4,11 @@ export const AuthActionTypes = {
     DEL_USER: 'DEL_USER'
 };
 
-export const initUSer = user => ({
+export const initUser = user => ({
     type: AuthActionTypes.INIT_USER,
     user
+});
+
+export const delUser = () => ({
+    type: AuthActionTypes.DEL_USER
 });

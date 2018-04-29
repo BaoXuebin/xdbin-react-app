@@ -63,9 +63,9 @@ class LoginForm extends PureComponent {
                             <Button loading={loading} color={Config.theme} fluid size="large" onClick={this.hanldeLogin}>Login</Button>
                         </Segment>
                     </Form>
-                    <Message error>
-                        {error}
-                    </Message>
+                    {
+                        error ? <Message error>{error}</Message> : <Message>{Config.defaultTitle}</Message>
+                    }
                 </Grid.Column>
             </Grid>
         );

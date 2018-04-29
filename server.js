@@ -43,6 +43,12 @@ app.prepare()
             app.render(req, res, actualPage, queryParams);
         });
 
+        // 后台管理
+        server.get('/mana', (req, res) => {
+            const actualPage = '/mana/blog';
+            app.render(req, res, actualPage);
+        });
+
         server.get('*', (req, res) => handle(req, res));
 
         server.listen(port, (err) => {

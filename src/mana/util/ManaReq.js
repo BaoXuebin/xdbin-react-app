@@ -1,9 +1,9 @@
 import Net from '../../utils/Net';
-import { LOGIN_URL, AUTH_TOKEN_URL } from '../../utils/Urls';
+import { LOGIN_URL, AUTH_TOKEN_URL, FETCH_ALL_BLOG_URL } from '../../utils/Urls';
 
 // 登录请求
 export const loginReq = (username, password) => new Promise((resolve, reject) => {
-    Net.neteaseFetch(LOGIN_URL, {
+    Net.fetch(LOGIN_URL, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -20,11 +20,25 @@ export const loginReq = (username, password) => new Promise((resolve, reject) =>
 
 // token 验证请求
 export const authReq = cookie => new Promise((resolve, reject) => {
-    Net.neteaseFetch(AUTH_TOKEN_URL, cookie, {
+    Net.authFetch(AUTH_TOKEN_URL, cookie, {
         method: 'post'
     })
         .then((data) => {
-            resolve(data.result);
+            resolve(data);
+        })
+        .catch((error) => {
+            reject(error.error || '未知错误');
+        });
+});
+
+// 请求所有笔记列表
+export const fetchAllBlogReq = page => new Promise((resolve, reject) => {
+    Net.fetch(`${FETCH_ALL_BLOG_URL}?page=${page}`)
+        .then((data) => {
+            if (data) {
+                resolve(data.content, data.totalElements);
+            }
+            reject(data);
         })
         .catch((error) => {
             reject(error.error || '未知错误');

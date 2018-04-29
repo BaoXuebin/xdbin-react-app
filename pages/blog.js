@@ -21,7 +21,7 @@ class Blog extends Component {
         };
         await fetchBlogListReq(global.page)
             .then((blogs) => { global.blogs = blogs; })
-            .catch(() => redirect(ctx.res));
+            .catch((e) => { console.log(e); });
         return { global };
     }
 
