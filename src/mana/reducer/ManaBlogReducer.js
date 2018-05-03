@@ -7,7 +7,8 @@ const initState = {
     loading: false,
     error: null,
     blogs: [],
-    total: 0
+    total: 0, // 全部页数
+    current: 0 // 当前页数
 };
 
 const ManaBlogReducer = (state = initState, action) => {
@@ -15,8 +16,15 @@ const ManaBlogReducer = (state = initState, action) => {
         case ManaBlogActionTypes.FETCH_ALL_BLOG:
             return Object.assign({}, state, { loading: true });
         case ManaBlogActionTypes.FETCH_ALL_BLOG_SUCCESS: {
-            const { blogs, total } = action;
-            return Object.assign({}, state, { loading: false, blogs, total });
+            console.log(action);
+            
+            const { blogs, total, current } = action;
+            return Object.assign({}, state, {
+                loading: false,
+                blogs,
+                total,
+                current
+            });
         }
         case ManaBlogActionTypes.FETCH_ALL_BLOG_ERROR:
             return Object.assign({}, state, { loading: false, error: action.error });

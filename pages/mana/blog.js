@@ -30,7 +30,7 @@ class Blog extends PureComponent {
         const { blogs } = this.props;
         return (
             <div>
-                <BlogTable blogs={blogs} />
+                <BlogTable blogs={blogs} totalPage={4} current={1} />
             </div>
         );
     }

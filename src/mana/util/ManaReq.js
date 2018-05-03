@@ -36,7 +36,7 @@ export const fetchAllBlogReq = page => new Promise((resolve, reject) => {
     Net.fetch(`${FETCH_ALL_BLOG_URL}?page=${page}`)
         .then((data) => {
             if (data) {
-                resolve(data.content, data.totalElements);
+                resolve(data.content, Math.ceil(data.totalElements / data.size), data.number + 1);
             }
             reject(data);
         })

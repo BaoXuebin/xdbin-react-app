@@ -6,7 +6,12 @@ import { Table, Button } from 'semantic-ui-react';
 import Pager from './Pager';
 
 const BlogTableItem = ({ blog }) => {
-    const { blogId, title, updateTime, ifPub } = blog;
+    const {
+        blogId,
+        title,
+        updateTime,
+        ifPub
+    } = blog;
     return (
         <Table.Row>
             <Table.Cell width={2}>{String(blogId).slice(-6)}</Table.Cell>
@@ -27,7 +32,7 @@ BlogTableItem.propTypes = {
     blog: PropTypes.shape().isRequired
 };
 
-const BlogTable = ({ blogs }) => {
+const BlogTable = ({ blogs, total, current }) => {
     const _html = blogs.map(blog => <BlogTableItem key={blog.blogId} blog={blog} />);
     return (
         <Table celled loading>
@@ -44,11 +49,20 @@ const BlogTable = ({ blogs }) => {
             </Table.Body>
             <Table.Footer>
                 <Table.Row>
-                    <Pager totalPage={10} current={2} />
+                    <Pager total={total} current={current} onChange={(page) => { console.log(page); }} />
                 </Table.Row>
             </Table.Footer>
         </Table>
     );
+};
+
+BlogTable.propTypes = {
+    blogs: PropTypes.arrayOf(PropTypes.shape()),
+    total: PropTypes.number.isRequired,
+    current: PropTypes.number.isRequired
+};
+BlogTable.defaultProps = {
+    blogs: []
 };
 
 export default BlogTable;
