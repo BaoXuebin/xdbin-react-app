@@ -5,9 +5,18 @@ import { Table, Menu, Icon } from 'semantic-ui-react';
 class Pager extends PureComponent {
     constructor(props) {
         super(props);
+        this.pages = [];
         this.handlePrev = this.handlePrev.bind(this);
         this.handleNext = this.handleNext.bind(this);
         this.handleClick = this.handleClick.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.total !== this.props.total) {
+            for (let i = 1; i <= nextProps.total; i += 1) {
+                this.pages.push(i);
+            }
+        }
     }
 
     handlePrev() {
@@ -24,30 +33,25 @@ class Pager extends PureComponent {
             onChange(_current);
         }
     }
-    handleClick() {
-        const { current, onChange } = this.props;
-        const _current = current - 1;
-        if (_current > 0) {
-            onChange(_current);
-        }
+    handleClick(page) {
+        const { onChange } = this.props;
+        onChange(page);
     }
 
     render() {
-        const { total, current } = this.props;
-        const html = [];
-        for (let i = 1; i <= total; i += 1) {
+        const { current } = this.props;
+        const html = this.pages.map((i) => {
             if (current === i) {
-                html.push(<Menu.Item key={i} as="a" style={{ backgroundColor: 'gray', color: 'white' }}>{i}</Menu.Item>);
-            } else {
-                html.push(<Menu.Item key={i} as="a" onClick={() => { this.handleClick(i); }}>{i}</Menu.Item>);
+                return (<Menu.Item key={i} as="a" style={{ backgroundColor: 'gray', color: 'white' }}>{i}</Menu.Item>);
             }
-        }
+            return (<Menu.Item key={i} as="a" onClick={() => { this.handleClick(i); }}>{i}</Menu.Item>);
+        });
         return (
             <Table.HeaderCell colSpan="4">
                 <Menu floated="right" pagination>
-                    {current > 1 && <Menu.Item as="a" icon onClick={this.handlePrev}><Icon name="chevron left" /></Menu.Item>}
+                    <Menu.Item as="a" icon onClick={this.handlePrev}><Icon name="chevron left" /></Menu.Item>
                     {html}
-                    {total > current && <Menu.Item as="a" icon onClick={this.handleNext}><Icon name="chevron right" /></Menu.Item>}
+                    <Menu.Item as="a" icon onClick={this.handleNext}><Icon name="chevron right" /></Menu.Item>
                 </Menu>
             </Table.HeaderCell>
         );

@@ -1,11 +1,12 @@
-import { fetchAllBlogReq } from '../util/ManaReq';
+import { fetchAllBlogReq, toggleBlogPubReq } from '../util/ManaReq';
 
 export const ManaBlogActionTypes = {
     FETCH_ALL_BLOG: 'FETCH_ALL_BLOG',
     FETCH_ALL_BLOG_SUCCESS: 'FETCH_ALL_BLOG_SUCCESS',
     FETCH_ALL_BLOG_ERROR: 'FETCH_ALL_BLOG_ERROR',
     CHANGE_CURRENT_PAGE: 'CHANGE_CURRENT_PAGE',
-    CHANGE_TOTAL_PAGE: 'CHANGE_TOTAL_PAGE'
+    CHANGE_TOTAL_PAGE: 'CHANGE_TOTAL_PAGE',
+    TOGGLE_BLOG_PUB_SUCCESS: 'TOGGLE_BLOG_PUB_SUCCESS'
 };
 
 const fetchAllBlog = () => ({
@@ -31,8 +32,8 @@ export const fetchAllBlogIfNeeded = page => (dispatch, getState) => {
     }
     dispatch(fetchAllBlog());
     return fetchAllBlogReq(page)
-        .then((blogs, total, current) => {
-            console.log(blogs, total, current);
+        .then((result) => {
+            const { blogs, total, current } = result;
             dispatch(fetchAllBlogSuccess(blogs, total, current));
         })
         .catch((error) => { dispatch(fetchAllBlogError(error)); });
@@ -48,3 +49,12 @@ export const changeTotalPage = total => ({
     type: ManaBlogActionTypes.CHANGE_TOTAL_PAGE,
     total
 });
+
+// 切换是否可见
+export const toggleBlogPub = (blogIdd, type) =>
+    dispatch => toggleBlogPubReq(blogIdd, type)
+        .then((result) => {
+            const { blogId, ifPub } = result;
+            dispatch({ type: ManaBlogActionTypes.TOGGLE_BLOG_PUB_SUCCESS, blogId, ifPub });
+        })
+        .catch((e) => { console.error(e); });

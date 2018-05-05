@@ -10,3 +10,5 @@ export const FETCH_STAR_BLOGS_URL = `${base}blog/star`;
 export const LOGIN_URL = `${base}login`; // 登录
 export const AUTH_TOKEN_URL = `${base}validate`; // token 验证
 export const FETCH_ALL_BLOG_URL = `${base}blogs/all`; // 所有的 blog
+export const TOGGLE_BLOG_PUB_URL = `${base}blog/togglePub`; // 切换博客是否可见
+export const ADD_TAG_URL = `${base}tag`; // 添加标签
