@@ -1,7 +1,4 @@
-import { combineReducers } from 'redux';
-
 import { ManaTagActionTypes } from '../action/ManaTagAction';
-import AuthReducer from './AuthReducer';
 
 const initState = {
     tags: null,
@@ -26,7 +23,4 @@ const TagBlogReducer = (state = initState, action) => {
     }
 };
 
-export default combineReducers({
-    auth: AuthReducer,
-    tag: TagBlogReducer
-});
+export default TagBlogReducer;

@@ -4,7 +4,7 @@ import withRedux from 'next-redux-wrapper';
 import { Divider } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 
-import ManaTagStore from '../../src/mana/store/ManaTagStore';
+import ManaStore from '../../src/mana/store/ManaStore';
 import AuthLayout from '../../src/mana/wrapper/AuthLayout';
 import TagItem from '../../src/blog/component/tag/TagItem';
 import TagInput from '../../src/mana/component/TagInput';
@@ -65,4 +65,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default withRedux(ManaTagStore, mapStateToProps, mapDispatchToProps)(AuthLayout(Tag));
+export default withRedux(ManaStore, mapStateToProps, mapDispatchToProps)(AuthLayout(Tag));

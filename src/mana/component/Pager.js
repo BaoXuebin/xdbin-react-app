@@ -6,6 +6,11 @@ class Pager extends PureComponent {
     constructor(props) {
         super(props);
         this.pages = [];
+        if (this.props.total > 0) {
+            for (let i = 1; i <= this.props.total; i += 1) {
+                this.pages.push(i);
+            }
+        }
         this.handlePrev = this.handlePrev.bind(this);
         this.handleNext = this.handleNext.bind(this);
         this.handleClick = this.handleClick.bind(this);

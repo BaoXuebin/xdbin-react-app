@@ -3,6 +3,7 @@ export default {
     NODE_ENV: 'development', // 开发环境
     // 网站名称
     website: 'dev',
+    basePath: 'http://localhost:3001/',
     // 接口
     baseUrl: 'http://localhost:3001/api/api/v1/'
 };

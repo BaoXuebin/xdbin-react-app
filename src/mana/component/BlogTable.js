@@ -44,6 +44,12 @@ class BlogTable extends PureComponent {
         this.handlePvtBlog = this.handlePvtBlog.bind(this);
     }
 
+    componentDidMount() {
+        if (this.props.blogs.length <= 0) {
+            this.props.fetchAllBlogIfNeeded(1);
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         const { current } = nextProps;
         if (current !== this.props.current && this.props.current !== 0) {

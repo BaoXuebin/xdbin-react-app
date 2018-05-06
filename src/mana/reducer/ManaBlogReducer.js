@@ -1,7 +1,4 @@
-import { combineReducers } from 'redux';
-
 import { ManaBlogActionTypes } from '../action/ManaBlogAction';
-import AuthReducer from './AuthReducer';
 import Collections from '../../utils/Collections';
 
 const initState = {
@@ -43,7 +40,5 @@ const ManaBlogReducer = (state = initState, action) => {
     }
 };
 
-export default combineReducers({
-    auth: AuthReducer,
-    blog: ManaBlogReducer
-});
+export default ManaBlogReducer;
+
