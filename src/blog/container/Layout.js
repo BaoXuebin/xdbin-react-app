@@ -31,7 +31,7 @@ export default ChildComponent => connect(null, null)(class extends Component {
             <Head key="head" title={global.title || Config.title} />,
             <Header key="header" logo={global.logo || null} search={global.search || false} />,
             <Grid centered key="body" style={{ margin: '-1rem 0' }}>
-                <Grid.Column computer={10} plant={13} mobile={16} className="xd-body">
+                <Grid.Column computer={10} plant={13} mobile={16} className={global.thin ? 'xd-body xd-thin-body' : 'xd-body'}>
                     <ChildComponent {...this.props} />
                     <Divider />
                     <Footer />

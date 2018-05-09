@@ -1,5 +1,5 @@
 import Collections from '../../utils/Collections';
-import { addTagReq } from '../util/ManaReq';
+import { addTagReq, delTagReq } from '../util/ManaReq';
 
 export const ManaTagActionTypes = {
     ADD_TAG: 'ADD_TAG',
@@ -7,7 +7,9 @@ export const ManaTagActionTypes = {
     ADD_TAG_ERROR: 'ADD_TAG_ERROR',
     DEL_TAG_SUCCESS: 'DEL_TAG_SUCCESS',
     CLEAR_TAG_ERROR: 'CLEAR_TAG_ERROR',
-    INIT_TAGS: 'INIT_TAGS'
+    INIT_TAGS: 'INIT_TAGS',
+    SHOW_DEL_MODAL: 'SHOW_DEL_MODAL',
+    HIDE_DEL_MODAL: 'HIDE_DEL_MODAL'
 };
 
 const addTag = () => ({
@@ -43,3 +45,25 @@ export const initTags = tags => ({
 export const clearError = () => ({
     type: ManaTagActionTypes.CLEAR_TAG_ERROR
 });
+
+export const showDelModal = tagId => ({
+    type: ManaTagActionTypes.SHOW_DEL_MODAL,
+    tagId
+});
+
+export const hideDelModal = () => ({
+    type: ManaTagActionTypes.HIDE_DEL_MODAL
+});
+
+const delTagSuccess = tagId => ({
+    type: ManaTagActionTypes.DEL_TAG_SUCCESS,
+    tagId
+});
+
+export const delTagIfNeeded = tagId =>
+    dispatch => delTagReq(tagId)
+        .then((result) => {
+            dispatch(delTagSuccess(result.tagId));
+            dispatch(hideDelModal());
+        })
+        .catch((error) => { console.error(error); });

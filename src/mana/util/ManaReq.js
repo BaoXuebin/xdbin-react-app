@@ -4,7 +4,9 @@ import {
     AUTH_TOKEN_URL,
     FETCH_ALL_BLOG_URL,
     TOGGLE_BLOG_PUB_URL,
-    ADD_TAG_URL
+    ADD_TAG_URL,
+    DEL_TAG_URL,
+    DEL_BLOG_URL
 } from '../../utils/Urls';
 
 // 登录请求
@@ -73,6 +75,19 @@ export const toggleBlogPubReq = (blogId, type) => new Promise((resolve, reject) 
         });
 });
 
+// 删除笔记
+export const delBlogReq = blogId => new Promise((resolve, reject) => {
+    Net.fetch(`${DEL_BLOG_URL}?blogId=${blogId}`, {
+        method: 'delete'
+    })
+        .then((data) => {
+            resolve(data);
+        })
+        .catch((error) => {
+            reject(error.error || '未知错误');
+        });
+});
+
 // 添加标签
 export const addTagReq = tag => new Promise((resolve, reject) => {
     Net.fetch(ADD_TAG_URL, {
@@ -81,6 +96,23 @@ export const addTagReq = tag => new Promise((resolve, reject) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ tagName: tag })
+    })
+        .then((data) => {
+            resolve(data);
+        })
+        .catch((error) => {
+            reject(error.error || '未知错误');
+        });
+});
+
+// 删除标签
+export const delTagReq = tagId => new Promise((resolve, reject) => {
+    Net.fetch(DEL_TAG_URL, {
+        method: 'delete',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ tagId })
     })
         .then((data) => {
             resolve(data);

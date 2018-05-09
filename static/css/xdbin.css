@@ -1,5 +1,6 @@
 body { background-color: #ebebeb; background-image: url('../img/bg.png'); }
 .xd-body { background-color: white; margin: 2rem 0 0 0; border-radius: 3px; box-shadow: 0 0 1px gray; }
+.xd-thin-body { margin: 1rem 0 0 0; }
 .xd-content { padding-top: 1rem; }
 img { max-width: 100%; }
 .xd-tags { font-size: 12px; line-height: 2.2rem; color: #9EABB3; }

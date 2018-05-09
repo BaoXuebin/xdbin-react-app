@@ -12,3 +12,6 @@ export const AUTH_TOKEN_URL = `${base}validate`; // token 验证
 export const FETCH_ALL_BLOG_URL = `${base}blogs/all`; // 所有的 blog
 export const TOGGLE_BLOG_PUB_URL = `${base}blog/togglePub`; // 切换博客是否可见
 export const ADD_TAG_URL = `${base}tag`; // 添加标签
+export const DEL_TAG_URL = `${base}tag`; // 删除标签
+export const ADD_BLOG_URL = `${base}blog`; // 添加笔记
+export const DEL_BLOG_URL = `${base}blog`; // 删除笔记

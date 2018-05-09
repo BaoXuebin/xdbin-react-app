@@ -5,13 +5,14 @@ import { bindActionCreators } from 'redux';
 
 import BlogStore from '../src/blog/store/BlogStore';
 import { fetchBlogListIfNeeded, initBlogs } from '../src/blog/action/BlogAction';
-import { redirect, fetchBlogListReq } from '../src/blog/utils/BlogReq';
+import { fetchBlogListReq } from '../src/blog/utils/BlogReq';
 import Layout from '../src/blog/container/Layout';
 import BlogContainer from '../src/blog/component/blog/BlogContainer';
 
 class Blog extends Component {
-    static async getInitialProps(ctx) {
+    static async getInitialProps() {
         const global = {
+            thin: true, // 距离顶部 1rem
             page: 1,
             logo: {
                 name: 'book',

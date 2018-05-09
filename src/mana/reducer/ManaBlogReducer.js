@@ -6,7 +6,8 @@ const initState = {
     error: null,
     blogs: [],
     total: 0, // 全部页数
-    current: 0 // 当前页数
+    current: 0, // 当前页数
+    modal: false // 是否显示笔记删除提示框
 };
 
 const ManaBlogReducer = (state = initState, action) => {
@@ -35,6 +36,12 @@ const ManaBlogReducer = (state = initState, action) => {
             }
             return Object.assign({}, state, { blogs: newBlogs });
         }
+        case ManaBlogActionTypes.SHOW_DEL_BLOG_MODAL:
+            return Object.assign({}, state, { modal: true, delBlogId: action.blogId });
+        case ManaBlogActionTypes.HIDE_DEL_BLOG_MODAL:
+            return Object.assign({}, state, { modal: false });
+        case ManaBlogActionTypes.DEL_BLOG_SUCCESS:
+            return Object.assign({}, state, { blogs: state.blogs.filter(b => b.blogId !== action.blogId) });
         default:
             return state;
     }

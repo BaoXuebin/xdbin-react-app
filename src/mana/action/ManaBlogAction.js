@@ -1,4 +1,4 @@
-import { fetchAllBlogReq, toggleBlogPubReq } from '../util/ManaReq';
+import { fetchAllBlogReq, toggleBlogPubReq, delBlogReq } from '../util/ManaReq';
 
 export const ManaBlogActionTypes = {
     FETCH_ALL_BLOG: 'FETCH_ALL_BLOG',
@@ -6,7 +6,10 @@ export const ManaBlogActionTypes = {
     FETCH_ALL_BLOG_ERROR: 'FETCH_ALL_BLOG_ERROR',
     CHANGE_CURRENT_PAGE: 'CHANGE_CURRENT_PAGE',
     CHANGE_TOTAL_PAGE: 'CHANGE_TOTAL_PAGE',
-    TOGGLE_BLOG_PUB_SUCCESS: 'TOGGLE_BLOG_PUB_SUCCESS'
+    TOGGLE_BLOG_PUB_SUCCESS: 'TOGGLE_BLOG_PUB_SUCCESS',
+    DEL_BLOG_SUCCESS: 'DEL_BLOG_SUCCESS',
+    SHOW_DEL_BLOG_MODAL: 'SHOW_DEL_BLOG_MODAL',
+    HIDE_DEL_BLOG_MODAL: 'HIDE_DEL_BLOG_MODAL'
 };
 
 const fetchAllBlog = () => ({
@@ -58,3 +61,23 @@ export const toggleBlogPub = (blogIdd, type) =>
             dispatch({ type: ManaBlogActionTypes.TOGGLE_BLOG_PUB_SUCCESS, blogId, ifPub });
         })
         .catch((e) => { console.error(e); });
+
+export const showDelBlogModal = blogId => ({
+    type: ManaBlogActionTypes.SHOW_DEL_BLOG_MODAL,
+    blogId
+});
+export const hideDelBlogModal = () => ({
+    type: ManaBlogActionTypes.HIDE_DEL_BLOG_MODAL
+});
+const delBlogSuccess = blogId => ({
+    type: ManaBlogActionTypes.DEL_BLOG_SUCCESS,
+    blogId
+});
+
+export const delBlogIfNeeded = blogId =>
+    dispatch => delBlogReq(blogId)
+        .then((result) => {
+            dispatch(delBlogSuccess(result.blogId));
+            dispatch(hideDelBlogModal());
+        })
+        .catch((error) => { console.error(error); });
