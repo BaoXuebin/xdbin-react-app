@@ -4,7 +4,7 @@
   "description": "V2",
   "main": "index.js",
   "scripts": {
-    "build": "next build",
+    "build": "next build && pm2 restart v2",
     "start": "next",
     "dev": "NODE_ENV=dev node server.js"
   },
