@@ -11,9 +11,9 @@ const port = 3001;
 app.prepare()
     .then(() => {
         const server = express();
-        server.use('/api', proxy('https://xdbin.com/'));
+        // server.use('/api', proxy('https://xdbin.com/'));
         server.use('/netease', proxy('http://47.104.56.20:4000/'));
-        // server.use('/api', proxy('http://localhost:8080'));
+        server.use('/api', proxy('http://localhost:8080'));
         server.use('/static', express.static('static'));
 
         // 默认首页
@@ -46,6 +46,17 @@ app.prepare()
         // 后台管理
         server.get('/mana', (req, res) => {
             const actualPage = '/mana/blog';
+            app.render(req, res, actualPage);
+        });
+        // 笔记编辑
+        server.get('/blog/:blogId/edit', (req, res) => {
+            const actualPage = '/mana/edit';
+            const queryParams = { blogId: req.params.blogId };
+            app.render(req, res, actualPage, queryParams);
+        });
+        // 添加笔记
+        server.get('/mana/add', (req, res) => {
+            const actualPage = '/mana/add';
             app.render(req, res, actualPage);
         });
 

@@ -20,14 +20,14 @@ export const clearError = () => ({
     type: LoginActionTypes.CLEAR_LOGIN_ERROR
 });
 
-export const loginIfNeeded = (username, password) => (dispatch, getState) => {
+export const loginIfNeeded = (username, password, r) => (dispatch, getState) => {
     const { loading } = getState();
     if (loading) {
         return dispatch(loginError('登录中，请稍后再试'));
     }
     dispatch(login());
     return loginReq(username, password)
-        .then(() => { href('/mana'); })
+        .then(() => { href(r || '/mana'); })
         .catch(error => dispatch(loginError(error)));
 };
 

@@ -15,6 +15,7 @@ import {
     delBlogIfNeeded
 } from '../action/ManaBlogAction';
 import ModalWrapper from '../wrapper/ModalWrapper';
+import { href } from '../../utils/Req';
 
 const BlogTableItem = ({
     blog,
@@ -35,7 +36,7 @@ const BlogTableItem = ({
             <Table.Cell width={3}>{moment(updateTime).format('MM.DD.YYYY')}</Table.Cell>
             <Table.Cell width={3}>
                 <Button.Group basic>
-                    <Button icon="edit" />
+                    <Button icon="edit" onClick={() => { href(`/blog/${blogId}/edit`); }} />
                     { ifPub === 1 ? <Button icon="eye" onClick={onPvt} /> : <Button icon="hide" onClick={onPub} /> }
                     <Button icon="delete" onClick={onDel} />
                 </Button.Group>

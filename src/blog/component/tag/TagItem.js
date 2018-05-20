@@ -6,8 +6,8 @@ import { Icon, Label } from 'semantic-ui-react';
 const TagItem = ({
     tag,
     link,
-    del,
-    onDel
+    icon,
+    onClick
 }) => {
     if (link) {
         return (
@@ -15,7 +15,7 @@ const TagItem = ({
                 <div className="tag">
                     <span>
                         {tag.tagName}
-                        {del && <Icon name="delete" onClick={() => { onDel(tag.tagId); }} />}
+                        {icon && <Icon style={{ margin: '0 0 0 0.75rem' }} name={icon} onClick={() => { onClick(tag.tagId); }} />}
                     </span>
                 </div>
             </Link>
@@ -24,7 +24,7 @@ const TagItem = ({
     return (
         <Label>
             {tag.tagName}
-            <Icon name="delete" link onClick={() => { onDel(tag.tagId); }} />
+            <Icon style={{ margin: '0 0 0 0.75rem' }} name={icon} link onClick={() => { onClick(tag.tagId); }} />
         </Label>
     );
 };
@@ -32,13 +32,13 @@ const TagItem = ({
 TagItem.propTypes = {
     tag: PropTypes.shape().isRequired,
     link: PropTypes.bool,
-    del: PropTypes.bool,
-    onDel: PropTypes.func
+    icon: PropTypes.string,
+    onClick: PropTypes.func
 };
 TagItem.defaultProps = {
     link: true,
-    del: false,
-    onDel: () => {}
+    icon: null,
+    onClick: () => {}
 };
 
 export default TagItem;

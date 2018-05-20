@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 
 import ManaStore from '../../src/mana/store/ManaStore';
 import AuthLayout from '../../src/mana/wrapper/AuthLayout';
-import TagItem from '../../src/blog/component/tag/TagItem';
+import TagGroup from '../../src/mana/component/TagGroup';
 import TagInput from '../../src/mana/component/TagInput';
 import { redirect, fetchAllTagReq } from '../../src/blog/utils/TagReq';
 import { initTags, showDelModal, hideDelModal, delTagIfNeeded } from '../../src/mana/action/ManaTagAction';
@@ -53,15 +53,12 @@ class Tag extends Component {
 
     render() {
         const { tags, loading, modal } = this.props;
-        const _html = tags.map(tag => (<TagItem key={tag.tagId} tag={tag} link={false} del onDel={this.props.showDelModal} />));
         return [
             <TagInput key="tag-input" loading={loading} />,
             <Divider key="divider" horizontal>
                 <span style={{ color: 'gray' }}>全部标签</span>
             </Divider>,
-            <div key="tag-pool" className="xd-tags" style={{ display: 'inline-block', marginLeft: '.5rem' }}>
-                {_html}
-            </div>,
+            <TagGroup key="tag-group" tags={tags} icon="delete" onClick={this.props.showDelModal} />,
             <ModalWrapper
                 key="tag-modal"
                 open={modal}

@@ -6,7 +6,9 @@ import {
     TOGGLE_BLOG_PUB_URL,
     ADD_TAG_URL,
     DEL_TAG_URL,
-    DEL_BLOG_URL
+    DEL_BLOG_URL,
+    ADD_BLOG_URL,
+    FETCH_EDIT_BLOG_DETAIL_URL
 } from '../../utils/Urls';
 
 // 登录请求
@@ -121,3 +123,32 @@ export const delTagReq = tagId => new Promise((resolve, reject) => {
             reject(error.error || '未知错误');
         });
 });
+
+// 获取要修改的笔记 (后端渲染请求)
+export const fetchEditBlogDetailReq = (cookie, blogId) => new Promise((resolve, reject) => {
+    Net.authFetch(`${FETCH_EDIT_BLOG_DETAIL_URL}${blogId}`, cookie)
+        .then((data) => {
+            resolve(data);
+        })
+        .catch((error) => {
+            reject(error.error || '未知错误');
+        });
+});
+
+// 添加标签
+export const saveBlogReq = blog => new Promise((resolve, reject) => {
+    Net.fetch(ADD_BLOG_URL, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(blog)
+    })
+        .then((data) => {
+            resolve(data);
+        })
+        .catch((error) => {
+            reject(error.error || '未知错误');
+        });
+});
+

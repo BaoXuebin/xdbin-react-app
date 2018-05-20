@@ -15,12 +15,20 @@ const ManaMenu = ({ active }) => (
                 <Icon name="tag" />
             </Menu.Item>
         </Link>
+        <Link href="/mana/add" prefetch>
+            <Menu.Item name="add">
+                <Icon name="add" />
+            </Menu.Item>
+        </Link>
         <Menu.Menu position="right">
             <Menu.Item
                 name="logout"
+                link
                 active={active === 'logout'}
                 onClick={this.handleItemClick}
-            />
+            >
+                <Icon name="sign out" link />退出
+            </Menu.Item>
         </Menu.Menu>
     </Menu>
 );

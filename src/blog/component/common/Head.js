@@ -10,10 +10,12 @@ const HtmlHead = ({ title }) => (
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link href="https://cdn.bootcss.com/semantic-ui/2.2.14/semantic.min.css" rel="stylesheet" />
         <link href="/static/css/atom.one.dark.min.css" rel="stylesheet" />
-        <link href="/static/css/xdbin.css" rel="stylesheet" />
         <link href="/static/css/pace-theme-flash.css" rel="stylesheet" />
-        <script src="/static/js/pace.min.js" />
+        <link href="/static/css/simplemde.min.css" rel="stylesheet" />
+        <link href="/static/css/xdbin.css" rel="stylesheet" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107197856-1" />
+        <script src="/static/js/pace.min.js" />
+        <script src="/static/js/simplemde.min.js" />
         <script src="/static/js/xdbin.js" />
     </Head>
 );

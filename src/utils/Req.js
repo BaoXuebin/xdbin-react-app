@@ -9,9 +9,9 @@ export const href = (url) => {
     }
 };
 
-export const nologin = (res) => {
+export const nologin = (res, r = '') => {
     if (res) {
-        redirect(res, '/login');
+        redirect(res, `/login?r=${r}`);
     } else {
         href('/login');
     }

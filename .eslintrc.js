@@ -47,6 +47,8 @@ module.exports = {
         "Stomp": true,
         // google analytics 相关全局变量
         "dataLayer": true,
-        "arguments": true
+        "arguments": true,
+        // simplemde 相关
+        "SimpleMDE": true
     }
 };

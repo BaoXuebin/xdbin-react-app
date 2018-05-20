@@ -21,7 +21,7 @@ class LoginForm extends PureComponent {
         } else if (!password) {
             this.props.loginError('密码不能为空');
         } else {
-            this.props.loginIfNeeded(username, password);
+            this.props.loginIfNeeded(username, password, this.props.return);
         }
     }
 
@@ -73,6 +73,7 @@ class LoginForm extends PureComponent {
 }
 
 LoginForm.propTypes = {
+    return: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string,
     loginError: PropTypes.func.isRequired,
