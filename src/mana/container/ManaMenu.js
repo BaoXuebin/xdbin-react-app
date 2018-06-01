@@ -15,11 +15,11 @@ const ManaMenu = ({ active }) => (
                 <Icon name="tag" />
             </Menu.Item>
         </Link>
-        <Link href="/mana/add" prefetch>
+        <a href="/mana/add" prefetch>
             <Menu.Item name="add">
                 <Icon name="add" />
             </Menu.Item>
-        </Link>
+        </a>
         <Menu.Menu position="right">
             <Menu.Item
                 name="logout"
