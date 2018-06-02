@@ -8,7 +8,8 @@ import {
     DEL_TAG_URL,
     DEL_BLOG_URL,
     ADD_BLOG_URL,
-    FETCH_EDIT_BLOG_DETAIL_URL
+    FETCH_EDIT_BLOG_DETAIL_URL,
+    FETCH_QINIU_TOKEN_URL
 } from '../../utils/Urls';
 
 // 登录请求
@@ -152,3 +153,12 @@ export const saveBlogReq = blog => new Promise((resolve, reject) => {
         });
 });
 
+export const fetchQiniuTokenReq = () => new Promise((resolve, reject) => {
+    Net.fetch(FETCH_QINIU_TOKEN_URL)
+        .then((data) => {
+            resolve(data);
+        })
+        .catch((error) => {
+            reject(error.error || '未知错误');
+        });
+});

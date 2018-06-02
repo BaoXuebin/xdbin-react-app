@@ -10,6 +10,7 @@ import OperateButtonBar from '../container/OperateButtonBar';
 import Editor from '../component/Editor';
 import TagGroup from '../component/TagGroup';
 import IfPubcbox from '../component/IfPubcbox';
+import Uploader from '../component/Uploader';
 
 class EditContainer extends PureComponent {
     constructor(props) {
@@ -82,6 +83,8 @@ class EditContainer extends PureComponent {
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
+                <Divider horizontal>图片上传</Divider>
+                <Uploader />
                 <Divider horizontal>预览内容</Divider>
                 <Editor text={summary} ref={(summaryMde) => { this.summaryMde = summaryMde; }} />
                 <Divider horizontal>笔记内容</Divider>

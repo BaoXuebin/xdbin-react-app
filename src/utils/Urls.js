@@ -16,3 +16,5 @@ export const ADD_TAG_URL = `${base}tag`; // 添加标签
 export const DEL_TAG_URL = `${base}tag`; // 删除标签
 export const ADD_BLOG_URL = `${base}blog`; // 添加笔记
 export const DEL_BLOG_URL = `${base}blog`; // 删除笔记
+
+export const FETCH_QINIU_TOKEN_URL = `${base}/qiniu/token`; // 七牛文件上传 token

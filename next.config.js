@@ -1,5 +1,7 @@
-module.exports = {
-    distDir: 'build',
+const withLess = require('@zeit/next-less');
+
+const config = {
+    // distDir: 'build',
     assetPrefix: '',
     // Disabling file-system routing
     useFileSystemPublicRoutes: true
@@ -18,3 +20,5 @@ module.exports = {
     //     return config;
     // }
 };
+
+module.exports = Object.assign({}, config, withLess());
