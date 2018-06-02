@@ -6,7 +6,8 @@
   "scripts": {
     "build": "next build",
     "start": "next",
-    "dev": "NODE_ENV=dev node server.js"
+    "dev": "NODE_ENV=dev node server.js",
+    "deploy": "git pull && pm2 stop v2 && next build && pm2 start v2"
   },
   "keywords": [
     "react",
