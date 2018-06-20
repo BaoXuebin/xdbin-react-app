@@ -15,6 +15,7 @@ app.prepare()
         server.use('/netease', proxy('http://47.104.56.20:4000/'));
         // server.use('/api', proxy('http://localhost:8080'));
         server.use('/static', express.static('static'));
+        server.use('/favicon.ico', express.static('static/favicon.ico'));
 
         // 默认首页
         server.get('/', (req, res) => {

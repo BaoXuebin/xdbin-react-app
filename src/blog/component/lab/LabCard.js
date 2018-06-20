@@ -8,7 +8,7 @@ const LabCard = ({ data }) => {
         <Card>
             <a href={data.route}>
                 <Card style={{ textAlign: 'left' }}>
-                    { data.image && <Image src={data.image} /> }
+                    <Image src={data.image || 'http://oxrjqkvly.bkt.clouddn.com/pics/20180602201043'} style={{ height: '230px', objectFit: 'cover' }} />
                     <Card.Content>
                         <Card.Header>
                             {data.title}

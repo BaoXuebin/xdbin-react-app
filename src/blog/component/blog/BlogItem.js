@@ -16,7 +16,7 @@ const BlogItem = ({ blog, filter }) => {
     } = blog;
     const title = filter ? blog.title.replace(new RegExp(filter, 'g'), `<span style="color: white; background-color: red;">${filter}</span>`) : blog.title;
     return (
-        <Container text>
+        <Container>
             <h2>
                 <a href={`/blog/${blogId}`} style={{ color: 'black' }} target="_blank" dangerouslySetInnerHTML={{ __html: title }} />
             </h2>

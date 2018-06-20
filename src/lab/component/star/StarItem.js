@@ -15,7 +15,7 @@ const StarItem = ({ blog }) => {
         origin
     } = blog;
     return (
-        <Container text>
+        <Container>
             <h2>
                 <a href={href} style={{ color: '#2a3845' }} target="_blank" dangerouslySetInnerHTML={{ __html: title }} />
             </h2>
