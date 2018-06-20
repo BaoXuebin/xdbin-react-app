@@ -1,7 +1,7 @@
 const withLess = require('@zeit/next-less');
 
 const config = {
-    // distDir: 'build',
+    distDir: 'build',
     assetPrefix: '',
     // Disabling file-system routing
     useFileSystemPublicRoutes: true

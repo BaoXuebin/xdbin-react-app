@@ -2,4 +2,4 @@
 .git/
 node_modules/
 dist/
-build/
+*.lock
