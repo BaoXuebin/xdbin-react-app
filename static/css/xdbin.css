@@ -33,6 +33,11 @@ body ::-webkit-scrollbar-thumb { border-radius: 5px; -webkit-box-shadow: inset 0
 ::-moz-selection{color:#fff;background:#ff5e2c;}
 ::-webkit-selection{color:#fff;background:#ff5e2c;}
 
+/* 去除 video 下载按钮 */
+video::-internal-media-controls-download-button {display:none;}
+video::-webkit-media-controls-enclosure {overflow:hidden;}
+video::-webkit-media-controls-panel {width: calc(100% + 30px);}
+
 .CodeMirror, .CodeMirror-scroll { min-height: 100px; }
 
 @media(max-width: 720px) {
@@ -55,3 +60,27 @@ body ::-webkit-scrollbar-thumb { border-radius: 5px; -webkit-box-shadow: inset 0
         padding: 2rem 2rem 0 2rem;
     }
 }
+
+.vedio-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.vedio-image:hover .icon {
+    display: inline;
+}
+.vedio-image .icon {
+    z-index: 3;
+    position: absolute;
+    display: none;
+}
+.vedio-image img {
+    position: absolute;
+}
+
+.shot { position: relative; min-height: 550px; background-color: #ccc; display: flex; justify-content: center; align-items: center; }
+.shot img { position: absolute; border: 8px solid whitesmoke; }
+
+.single-line { white-space: nowrap; overflow: hidden; -o-text-overflow: ellipsis; text-overflow: ellipsis; }

@@ -14,7 +14,7 @@ export default [
         description: 'Mp3 Player.',
         date: '10.19.2017',
         route: '/lab/player',
-        icon: ['github', 'code']
+        icon: ['music']
     },
     {
         id: '3',
@@ -22,14 +22,32 @@ export default [
         description: '关注的其他人博客.',
         date: '03.30.2018',
         route: '/lab/star',
-        icon: ['github', 'feed']
+        icon: ['feed']
+    },
+    // {
+    //     id: '4',
+    //     title: '计划',
+    //     description: '短期规划.',
+    //     date: '06.19.2018',
+    //     route: '/lab/todo',
+    //     icon: ['tasks', 'code']
+    // },
+    {
+        id: '5',
+        title: 'Video',
+        description: '短片',
+        image: 'http://oxrjqkvly.bkt.clouddn.com/pics/20180707152553',
+        date: '07.07.2018',
+        route: '/lab/video',
+        icon: ['film']
     },
     {
-        id: '4',
-        title: '计划',
-        description: '短期规划.',
-        date: '06.19.2018',
-        route: '/lab/todo',
-        icon: ['tasks', 'code']
+        id: '6',
+        title: '视频截图',
+        description: '咔咔咔',
+        image: 'http://oxrjqkvly.bkt.clouddn.com/pics/20180708004312',
+        date: '07.07.2018',
+        route: '/lab/shot',
+        icon: ['crop', 'cut']
     }
 ];
