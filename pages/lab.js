@@ -23,7 +23,7 @@ class Lab extends Component {
     render() {
         const _html = LabData.map(lab => <Grid.Column key={lab.id}><LabCard data={lab} /></Grid.Column>);
         return (
-            <Segment style={{ maxWidth: '1000px', margin: '1rem auto', padding: '30px 50px' }}>
+            <Segment className="lab-container">
                 <Divider horizontal>Alpha</Divider>
                 <Grid doubling columns={4} verticalAlign="top">
                     { _html }
