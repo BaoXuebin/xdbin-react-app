@@ -62,10 +62,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 30px);}
     }
 }
 
-.ui.segment.lab-container a {
-    margin: 1rem;
-    display: inline-block;
-}
+.ui.segment.lab-container a.more {margin: 1rem; display: inline-block;}
 
 .vedio-image {
     position: relative;

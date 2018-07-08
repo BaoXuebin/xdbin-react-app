@@ -7,6 +7,7 @@ import LabStore from '../../src/blog/store/LabStore';
 import LabLayout from '../../src/lab/container/LabLayout';
 import VideoCard from '../../src/lab/component/video/VideoCard';
 import { pubVideoReq } from '../../src/lab/utils/VideoReq';
+import Footer from '../../src/blog/component/common/Footer';
 
 class Video extends Component {
     static async getInitialProps() {
@@ -66,8 +67,9 @@ class Video extends Component {
                     { videos && videos.map(video => <Grid.Column key={video.id}><VideoCard data={video} /></Grid.Column>) }
                 </Grid>
                 { loading && <Loader active inline size="small" /> }
-                { more && !loading && <a style={{ cursor: 'pointer' }} onClick={this.handleReqVideo}>加载更多</a> }
+                { more && !loading && <a className="more" style={{ cursor: 'pointer' }} onClick={this.handleReqVideo}>加载更多</a> }
                 <Divider />
+                <Footer />
             </Segment>
         );
     }
