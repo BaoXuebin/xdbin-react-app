@@ -18,3 +18,7 @@ export const ADD_BLOG_URL = `${base}blog`; // 添加笔记
 export const DEL_BLOG_URL = `${base}blog`; // 删除笔记
 
 export const FETCH_QINIU_TOKEN_URL = `${base}/qiniu/token`; // 七牛文件上传 token
+
+// video
+export const FETCH_VIDEO_URL = `${base}/video`;
+export const FETCH_ALL_VIDEO_URL = `${base}/video/all`;

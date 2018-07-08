@@ -27,7 +27,7 @@ const VideoCard = ({ data }) => (
             </Modal>
             <Card.Content>
                 <Card.Description>
-                    {data.title}
+                    {data.name}
                 </Card.Description>
             </Card.Content>
         </Card>

@@ -54,11 +54,17 @@ video::-webkit-media-controls-panel {width: calc(100% + 30px);}
         max-width: 1000px;
         margin: 1rem auto;
         padding: 30px 50px;
+        text-align: center;
     }
     .blog-item-container {
         margin-top: 1rem;
         padding: 2rem 2rem 0 2rem;
     }
+}
+
+.ui.segment.lab-container a {
+    margin: 1rem;
+    display: inline-block;
 }
 
 .vedio-image {
