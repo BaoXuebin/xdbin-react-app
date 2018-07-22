@@ -12,7 +12,8 @@ const StarItem = ({ blog }) => {
         href,
         publishTime,
         author,
-        origin
+        origin,
+        originLink
     } = blog;
     return (
         <Container>
@@ -26,7 +27,7 @@ const StarItem = ({ blog }) => {
                         { author && <Author author={author} /> }
                     </Grid.Column>
                     <Grid.Column textAlign="right" width={11}>
-                        <Origin origin={origin} />
+                        <Origin origin={origin} originLink={originLink} />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

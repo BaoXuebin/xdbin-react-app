@@ -16,7 +16,7 @@ const StarContainer = ({
     }
     const blogItemHtml = blogs.map(blog => <StarItem key={blog.uid} blog={blog} />);
     return (
-        <div style={{ marginTop: '1rem', padding: '0 2rem 0 2rem' }}>
+        <div className="star-item-container">
             {blogItemHtml}
             <Grid>
                 <Grid.Column textAlign="center">

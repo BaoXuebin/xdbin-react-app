@@ -37,10 +37,10 @@ const NavHeader = (props) => {
                                     on="hover"
                                 />
                             </a>
-                            <a href="/aboutme" style={{ color: 'black' }}>
+                            <a href="/lab/star" style={{ color: 'black' }}>
                                 <Popup
-                                    trigger={<Icon name="heartbeat" size="large" link />}
-                                    content="「关于我」"
+                                    trigger={<Icon name="rss" size="large" link />}
+                                    content="「订阅」"
                                     on="hover"
                                 />
                             </a>
