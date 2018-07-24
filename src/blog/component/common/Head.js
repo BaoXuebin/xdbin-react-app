@@ -9,7 +9,7 @@ const HtmlHead = ({ title }) => (
         <title>{`${title} - ${Config.website}`}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="shortcut icon" href="/static/favicon.ico" />
-        <link href="https://cdn.bootcss.com/semantic-ui/2.2.14/semantic.min.css" rel="stylesheet" />
+        <link href="https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
         <link href="/static/css/atom.one.dark.min.css" rel="stylesheet" />
         <link href="/static/css/pace-theme-flash.css" rel="stylesheet" />
         <link href="/static/css/simplemde.min.css" rel="stylesheet" />

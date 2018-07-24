@@ -59,7 +59,6 @@ class Video extends Component {
     render() {
         if (!this.state) return null;
         const { loading, videos, more } = this.state;
-        console.log(videos);
         return (
             <Segment className="lab-container">
                 <Divider />

@@ -18,8 +18,8 @@ const VideoCard = ({ data }) => (
                 size="large"
                 style={{ top: '3rem' }}
             >
-                <Modal.Content style={{ padding: '0' }}>
-                    <video controls="controls" width="100%" height="101%" autoPlay="autoplay" style={{ marginBottom: '-4px' }}>
+                <Modal.Content className="scrolling" style={{ padding: 0, maxHeight: '610px' }}>
+                    <video controls="controls" width="100%" height="100%" autoPlay="autoplay" style={{ marginBottom: '-4px' }}>
                         <source type="video/mp4" src={data.source} />
                         您的浏览器不支持Video标签。
                     </video>
