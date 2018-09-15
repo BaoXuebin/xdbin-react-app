@@ -22,6 +22,8 @@ export default class Net {
                     } else if (result.code === 401) {
                         nologin();
                         reject(result);
+                    } else if (result && result.status > 200) {
+                        reject(result);
                     }
                     resolve(result);
                 }).catch((e) => {

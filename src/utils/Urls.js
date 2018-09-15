@@ -22,3 +22,8 @@ export const FETCH_QINIU_TOKEN_URL = `${base}/qiniu/token`; // 七牛文件上�
 // video
 export const FETCH_VIDEO_URL = `${base}/video`;
 export const FETCH_ALL_VIDEO_URL = `${base}/video/all`;
+
+// comment
+export const FETCH_BLOG_COMMENT = `${base}comment`;
+export const FETCH_COMMENT = `${base}comment`; // /comment/23
+export const PUBLISH_COMMENT = `${base}comment`; // POST 请求

@@ -11,5 +11,6 @@ export default Object.assign({
     website: 'xdbin',
     defaultTitle: '陆止于此，海始于斯。',
     neteaseApi: '/netease/',
-    theme: 'red'
+    theme: 'red',
+    defaultAvatar: 'https://cn.gravatar.com/avatar/d7391870bd848246ba32d17dd031c4c6?s=80&r=G&d='
 }, Config);

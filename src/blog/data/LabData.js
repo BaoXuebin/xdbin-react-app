@@ -21,16 +21,18 @@ export default [
         title: '知无涯',
         description: '关注的其他人博客.',
         date: '03.30.2018',
+        image: 'http://oxrjqkvly.bkt.clouddn.com/pics/20180826203453',
         route: '/lab/star',
         icon: ['feed']
     },
     // {
     //     id: '4',
-    //     title: '计划',
+    //     title: '第一次',
     //     description: '短期规划.',
-    //     date: '06.19.2018',
-    //     route: '/lab/todo',
-    //     icon: ['tasks', 'code']
+    //     image: 'http://oxrjqkvly.bkt.clouddn.com/pics/20180826203453',
+    //     date: '08.26.2018',
+    //     route: '/lab/first',
+    //     icon: ['tasks']
     // },
     {
         id: '5',

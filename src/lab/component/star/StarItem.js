@@ -23,7 +23,7 @@ const StarItem = ({ blog }) => {
             <Grid columns={2}>
                 <Grid.Row>
                     <Grid.Column textAlign="left" width={5}>
-                        <span style={{ color: 'gray', fontSize: 13 }}>{moment(publishTime).format('MM.DD.YYYY')}</span>
+                        <span style={{ color: 'gray', fontSize: 13, lineHeight: '30px' }}>{moment(publishTime).format('MM.DD.YYYY')}</span>
                         { author && <Author author={author} /> }
                     </Grid.Column>
                     <Grid.Column textAlign="right" width={11}>
