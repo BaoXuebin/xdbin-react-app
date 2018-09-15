@@ -46,19 +46,21 @@ const CommentList = ({
     pageSize,
     total
 }) => {
-    if (total === 0 && top === null) {
+    if (total === 0 && top.length === 0) {
         return <Empty content="快发表第一个评论吧 ~" />;
     }
+    const _topHtml = top.map(c => <CommentItem key={c.id} comment={c} />);
     const _html = comments.map(c => <CommentItem key={c.id} comment={c} />);
     return (
         <Fragment>
             <Header key="comment-header" as="h3">评论 ({total})</Header>
             {
-                top && [
+                top.length > 0 && [
+                    <div key="my-divider" style={{ margin: '0 3rem' }}><Divider horizontal>我的评论</Divider></div>,
                     <Comment.Group key="top-comment">
-                        <CommentItem key={top.id} comment={top} />
+                        {_topHtml}
                     </Comment.Group>,
-                    <div key="divider" style={{ margin: '0 3rem' }}><Divider /></div>
+                    <div key="all-divider" style={{ margin: '0 3rem' }}><Divider horizontal>所有评论</Divider></div>
                 ]
             }
             <Comment.Group key="comment-body">
@@ -71,7 +73,7 @@ const CommentList = ({
 };
 
 CommentList.propTypes = {
-    top: PropTypes.shape(),
+    top: PropTypes.arrayOf(PropTypes.shape()),
     comments: PropTypes.arrayOf(PropTypes.shape()),
     pageNo: PropTypes.number,
     pageSize: PropTypes.number,

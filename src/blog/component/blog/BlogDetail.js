@@ -12,13 +12,13 @@ class BlogDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            myComment: null
+            myComment: []
         };
         this.handlePublish = this.handlePublish.bind(this);
     }
 
     handlePublish(comment) {
-        this.setState({ myComment: comment });
+        this.setState({ myComment: [comment, ...this.state.myComment] });
     }
 
     render() {
@@ -59,7 +59,7 @@ class BlogDetail extends Component {
                 <Divider />
                 <CommentList
                     top={myComment}
-                    comments={myComment ? comments.concat([myComment]) : comments}
+                    comments={comments}
                     onLoadMore={onLoadMore}
                     loading={loading}
                     pageNo={pageNo}
