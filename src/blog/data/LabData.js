@@ -25,15 +25,15 @@ export default [
         route: '/lab/star',
         icon: ['feed']
     },
-    // {
-    //     id: '4',
-    //     title: '第一次',
-    //     description: '短期规划.',
-    //     image: 'http://oxrjqkvly.bkt.clouddn.com/pics/20180826203453',
-    //     date: '08.26.2018',
-    //     route: '/lab/first',
-    //     icon: ['tasks']
-    // },
+    {
+        id: '4',
+        title: '第一次',
+        description: '短期规划.',
+        image: 'http://oxrjqkvly.bkt.clouddn.com/pics/20180826203453',
+        date: '08.26.2018',
+        route: '/lab/first',
+        icon: ['tasks']
+    },
     {
         id: '5',
         title: 'Video',
@@ -51,5 +51,14 @@ export default [
         date: '07.07.2018',
         route: '/lab/shot',
         icon: ['crop', 'cut']
+    },
+    {
+        id: '7',
+        title: '留言板',
+        description: '畅所欲言',
+        image: 'http://oxrjqkvly.bkt.clouddn.com/pics/20180708004312',
+        date: '09.16.2018',
+        route: '/lab/message',
+        icon: ['comment alternate']
     }
 ];

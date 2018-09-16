@@ -7,6 +7,7 @@ import Tag from '../tag/Tag';
 import BlogTime from './BlogTime';
 import CommentEditor from '../comment/CommentEditor';
 import CommentList from '../comment/CommentList';
+import { href } from '../../../utils/Req';
 
 class BlogDetail extends Component {
     constructor(props) {
@@ -15,10 +16,17 @@ class BlogDetail extends Component {
             myComment: []
         };
         this.handlePublish = this.handlePublish.bind(this);
+        this.handleReply = this.handleReply.bind(this);
     }
 
     handlePublish(comment) {
         this.setState({ myComment: [comment, ...this.state.myComment] });
+    }
+
+    handleReply(replyId) {
+        this.setState({ replyId }, () => {
+            href('#reply-comment');
+        });
     }
 
     render() {
@@ -39,7 +47,7 @@ class BlogDetail extends Component {
             tags,
             content
         } = blog;
-        const { myComment } = this.state;
+        const { myComment, replyId } = this.state;
         return (
             <Container text className="xd-content">
                 <Header as="h2" content={title} />
@@ -55,16 +63,17 @@ class BlogDetail extends Component {
                 <MarkdownPreview style={{ color: '#293846' }} text={content} />
                 <div style={{ height: '60px' }} />
                 <Divider />
-                <CommentEditor origin={blogId} onPublish={this.handlePublish} />
+                <CommentEditor origin={blogId} onPublish={this.handlePublish} replyId={replyId} />
                 <Divider />
                 <CommentList
                     top={myComment}
                     comments={comments}
-                    onLoadMore={onLoadMore}
                     loading={loading}
                     pageNo={pageNo}
                     pageSize={pageSize}
                     total={total}
+                    onReply={this.handleReply}
+                    onLoadMore={onLoadMore}
                 />
             </Container>
         );

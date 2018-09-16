@@ -1,43 +1,53 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Comment, Button, Header, Divider, Label, Icon } from 'semantic-ui-react';
+import { Comment, Button, Header, Divider, Label, Icon, Grid } from 'semantic-ui-react';
 import Empty from '../common/Empty';
 import Config from '../../../config/Config';
 import ReplyCommentPopup from './ReplyCommentPopup';
 
 moment.locale('zh-cn');
 
-const CommentItem = ({ comment }) => (
+const CommentItem = ({ comment, onReply }) => (
     <Comment style={{ marginBottom: '1rem' }}>
         <Comment.Avatar as="a" src={comment.avatar || Config.defaultAvatar} />
         <Comment.Content>
             <Comment.Author>
-                {comment.username}&nbsp;&nbsp;
-                {
-                    comment.username === '止于秋分' &&
-                        <Label color="red" horizontal style={{ padding: '.2rem', fontWeight: 'normal' }}>
-                            作者
-                        </Label>
-                }
-                { comment.replyId && '回复' }
-                { comment.replyId && <ReplyCommentPopup replyId={comment.replyId} />}
+                <Grid>
+                    <Grid.Column floated="left" width={12}>
+                        {comment.username}&nbsp;&nbsp;
+                        {
+                            comment.username === '止于秋分' &&
+                                <Label color="red" horizontal style={{ padding: '.2rem', fontWeight: 'normal' }}>
+                                    作者
+                                </Label>
+                        }
+                        { comment.replyId && '回复' }
+                        { comment.replyId && <ReplyCommentPopup replyId={comment.replyId} />}
+                    </Grid.Column>
+                    <Grid.Column floated="right" width={4} textAlign="right">
+                        <span style={{ color: 'grey' }}>#{comment.id}</span>
+                    </Grid.Column>
+                </Grid>
             </Comment.Author>
             <Comment.Metadata>
                 <div>{moment(comment.publishTime).fromNow()}</div>
-                <div>
-                    <Icon name="reply" link />
-                </div>
             </Comment.Metadata>
             <Comment.Text>
                 {comment.content}
             </Comment.Text>
+            <Comment.Actions>
+                <Comment.Action>
+                    <Icon name="reply" onClick={() => { onReply(comment.id); }} />
+                </Comment.Action>
+            </Comment.Actions>
         </Comment.Content>
     </Comment>
 );
 
 CommentItem.propTypes = {
-    comment: PropTypes.shape().isRequired
+    comment: PropTypes.shape().isRequired,
+    onReply: PropTypes.func.isRequired
 };
 
 const CommentList = ({
@@ -47,13 +57,14 @@ const CommentList = ({
     loading,
     pageNo,
     pageSize,
-    total
+    total,
+    onReply
 }) => {
     if (total === 0 && top.length === 0) {
         return <Empty content="快发表第一个评论吧 ~" />;
     }
-    const _topHtml = top.map(c => <CommentItem key={c.id} comment={c} />);
-    const _html = comments.map(c => <CommentItem key={c.id} comment={c} />);
+    const _topHtml = top.map(c => <CommentItem key={c.id} comment={c} onReply={onReply} />);
+    const _html = comments.map(c => <CommentItem key={c.id} comment={c} onReply={onReply} />);
     return (
         <Fragment>
             <Header key="comment-header" as="h3">评论 ({total})</Header>
@@ -82,6 +93,7 @@ CommentList.propTypes = {
     pageSize: PropTypes.number,
     total: PropTypes.number,
     onLoadMore: PropTypes.func.isRequired,
+    onReply: PropTypes.func.isRequired,
     loading: PropTypes.bool
 };
 CommentList.defaultProps = {

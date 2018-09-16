@@ -13,7 +13,7 @@ class CommentEditor extends Component {
             type: null,
             loading: false,
             error: null,
-            success: null,
+            // success: null,
             comment: null,
             username: null,
             email: null,
@@ -49,8 +49,8 @@ class CommentEditor extends Component {
 
     handleClearHint() {
         this.setState({
-            error: null,
-            success: null
+            error: null
+            // success: null
         });
     }
 
@@ -79,19 +79,19 @@ class CommentEditor extends Component {
             this.setState({ error: '评论不能为空' });
             return;
         }
-        this.setState({ loading: true, error: null, success: null });
+        this.setState({ loading: true, error: null });
         publishCommentReq({
             username,
             email,
             website,
             content: comment,
-            origin: this.props.origin
+            origin: this.props.origin,
+            replyId: this.props.replyId
         })
             .then((data) => {
                 this.comment.ref.value = '';
                 this.props.onPublish(data);
                 this.setState({
-                    success: '评论发表成功',
                     comment: '', // 清空评论内容
                     loading: false
                 });
@@ -123,15 +123,16 @@ class CommentEditor extends Component {
             type,
             loading,
             error,
-            success,
             comment,
             username,
             email,
             website
         } = this.state;
+        const { replyId } = this.props;
         return (
-            <div>
+            <div id="reply-comment">
                 <Form style={{ marginBottom: '1rem' }}>
+                    { replyId && <span style={{ cursor: 'pointer', margin: '0 .2rem', color: 'grey' }}>回复 #{replyId}</span> }
                     <TextArea
                         autoHeight
                         placeholder="说点什么吧 ~"
@@ -213,10 +214,12 @@ class CommentEditor extends Component {
 
 CommentEditor.propTypes = {
     origin: PropTypes.string.isRequired,
-    onPublish: PropTypes.func
+    onPublish: PropTypes.func,
+    replyId: PropTypes.number
 };
 CommentEditor.defaultProps = {
-    onPublish: () => {}
+    onPublish: () => {},
+    replyId: null
 };
 
 export default CommentEditor;

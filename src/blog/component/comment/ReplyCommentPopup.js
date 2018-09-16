@@ -64,7 +64,7 @@ class ReplyCommentPopup extends Component {
                             </Label>
                     }
                     { comment.replyId && '回复' }
-                    { comment.replyId && <span style={{ cursor: 'pointer', margin: '0 .2rem', color: 'grey' }}>#{comment.id}</span> }
+                    { comment.replyId && <span style={{ cursor: 'pointer', margin: '0 .2rem', color: 'grey' }}>#{comment.replyId}</span> }
                     <span style={{ fontSize: '12px', fontWeight: 'normal', color: 'gray' }}>{moment(comment.publishTime).fromNow()}</span>
                 </Popup.Header>,
                 <Popup.Content key="content">
