@@ -1,30 +1,33 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Comment, Button, Header, Divider } from 'semantic-ui-react';
-import Empty from './Empty';
+import { Comment, Button, Header, Divider, Label, Icon } from 'semantic-ui-react';
+import Empty from '../common/Empty';
 import Config from '../../../config/Config';
+import ReplyCommentPopup from './ReplyCommentPopup';
 
 moment.locale('zh-cn');
 
-// { id: 4,
-//     origin: '8a9eec5163c064a70163e41f18fc0002',
-//     replyId: null,
-//     username: '制约秋分',
-//     content: 'Hello World!',
-//     type: null,
-//     publishTime: 1536854711000,
-//     valid: 1 },
 const CommentItem = ({ comment }) => (
     <Comment style={{ marginBottom: '1rem' }}>
         <Comment.Avatar as="a" src={comment.avatar || Config.defaultAvatar} />
         <Comment.Content>
-            <Comment.Author>{comment.username}</Comment.Author>
+            <Comment.Author>
+                {comment.username}&nbsp;&nbsp;
+                {
+                    comment.username === '止于秋分' &&
+                        <Label color="red" horizontal style={{ padding: '.2rem', fontWeight: 'normal' }}>
+                            作者
+                        </Label>
+                }
+                { comment.replyId && '回复' }
+                { comment.replyId && <ReplyCommentPopup replyId={comment.replyId} />}
+            </Comment.Author>
             <Comment.Metadata>
                 <div>{moment(comment.publishTime).fromNow()}</div>
-                {/* <div>
+                <div>
                     <Icon name="reply" link />
-                </div> */}
+                </div>
             </Comment.Metadata>
             <Comment.Text>
                 {comment.content}

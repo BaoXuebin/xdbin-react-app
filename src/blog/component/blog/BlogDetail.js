@@ -5,8 +5,8 @@ import { Container, Divider, Header, Grid } from 'semantic-ui-react';
 import MarkdownPreview from '../common/MarkdownPreview';
 import Tag from '../tag/Tag';
 import BlogTime from './BlogTime';
-import CommentEditor from '../common/CommentEditor';
-import CommentList from '../common/CommentList';
+import CommentEditor from '../comment/CommentEditor';
+import CommentList from '../comment/CommentList';
 
 class BlogDetail extends Component {
     constructor(props) {
