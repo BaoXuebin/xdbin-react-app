@@ -13,11 +13,11 @@ class CommentEditor extends Component {
             type: null,
             loading: false,
             error: null,
-            // success: null,
             comment: null,
             username: null,
             email: null,
-            website: null
+            website: null,
+            replyId: null
         };
         this.handlePublish = this.handlePublish.bind(this);
         this.handleClearHint = this.handleClearHint.bind(this);
@@ -25,6 +25,7 @@ class CommentEditor extends Component {
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangeWebsite = this.handleChangeWebsite.bind(this);
+        this.handleClearReply = this.handleClearReply.bind(this);
     }
 
     componentDidMount() {
@@ -38,13 +39,24 @@ class CommentEditor extends Component {
                 type: user ? 'show' : 'edit',
                 username: user ? user.username : null,
                 email: user ? user.email : null,
-                website: user ? user.website : null
+                website: user ? user.website : null,
+                replyId: this.props.replyId
             });
         });
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.replyId !== this.state.replyId) {
+            this.setState({ replyId: nextProps.replyId });
+        }
+    }
+
     onMount(callback) {
         callback();
+    }
+
+    handleClearReply() {
+        this.setState({ replyId: null });
     }
 
     handleClearHint() {
@@ -62,7 +74,12 @@ class CommentEditor extends Component {
 
     handlePublish() {
         const comment = this.comment.ref.value;
-        const { username, email, website } = this.state;
+        const {
+            username,
+            email,
+            website,
+            replyId
+        } = this.state;
         if (isEmpty(username)) {
             this.setState({ error: '昵称不能为空' });
             return;
@@ -86,14 +103,15 @@ class CommentEditor extends Component {
             website,
             content: comment,
             origin: this.props.origin,
-            replyId: this.props.replyId
+            replyId
         })
             .then((data) => {
                 this.comment.ref.value = '';
                 this.props.onPublish(data);
                 this.setState({
                     comment: '', // 清空评论内容
-                    loading: false
+                    loading: false,
+                    replyId: null
                 });
             })
             .catch((e) => { this.setState({ error: '评论发布失败', loading: false }); console.log(e); });
@@ -126,13 +144,20 @@ class CommentEditor extends Component {
             comment,
             username,
             email,
-            website
+            website,
+            replyId
         } = this.state;
-        const { replyId } = this.props;
         return (
             <div id="reply-comment">
                 <Form style={{ marginBottom: '1rem' }}>
-                    { replyId && <span style={{ cursor: 'pointer', margin: '0 .2rem', color: 'grey' }}>回复 #{replyId}</span> }
+                    { replyId &&
+                        <Label image>
+                            <img alt="头像" src="https://cn.gravatar.com/avatar/d7391870bd848246ba32d17dd031c4c6?s=80&r=G&d=" />
+                            回复 #{replyId}
+                            <Icon name="delete" onClick={this.handleClearReply} />
+                        </Label>
+                    }
+                    <div style={{ height: '.5rem' }} />
                     <TextArea
                         autoHeight
                         placeholder="说点什么吧 ~"

@@ -15,7 +15,7 @@ class Message extends Component {
         const global = {
             page: 1,
             logo: {
-                name: 'paper plane',
+                name: 'comment alternate',
                 text: '留言板'
             },
             title: '「留言板」'

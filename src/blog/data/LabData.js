@@ -9,6 +9,15 @@ export default [
         icon: ['heartbeat', 'github', 'jsfiddle']
     },
     {
+        id: '7',
+        title: '留言板',
+        description: '畅所欲言',
+        image: 'http://oxrjqkvly.bkt.clouddn.com/pics/20180917002405',
+        date: '09.16.2018',
+        route: '/lab/message',
+        icon: ['comment alternate']
+    },
+    {
         id: '2',
         title: '音乐播放器',
         description: 'Mp3 Player.',
@@ -51,14 +60,5 @@ export default [
         date: '07.07.2018',
         route: '/lab/shot',
         icon: ['crop', 'cut']
-    },
-    {
-        id: '7',
-        title: '留言板',
-        description: '畅所欲言',
-        image: 'http://oxrjqkvly.bkt.clouddn.com/pics/20180708004312',
-        date: '09.16.2018',
-        route: '/lab/message',
-        icon: ['comment alternate']
     }
 ];
