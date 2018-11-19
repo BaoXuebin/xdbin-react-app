@@ -27,3 +27,7 @@ export const FETCH_ALL_VIDEO_URL = `${base}/video/all`;
 export const FETCH_BLOG_COMMENT = `${base}comment`;
 export const FETCH_COMMENT = `${base}comment`; // /comment/23
 export const PUBLISH_COMMENT = `${base}comment`; // POST 请求
+
+// mood
+export const FETCH_MOOD_PAGE_URL = `${base}mood`;
+export const SAVE_MOOD_URL = `${base}mood`;

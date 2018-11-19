@@ -23,7 +23,8 @@ export default ChildComponent => connect(null, null)(class extends Component {
         return [
             <Head key="head" title={global.title || Config.title} />,
             <Header key="header" logo={global.logo || null} search={global.search || false} />,
-            <ChildComponent {...this.props} />
+            <ChildComponent key="childComponent" {...this.props} />
         ];
     }
 });
+

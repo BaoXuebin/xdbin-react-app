@@ -33,9 +33,9 @@ class Message extends Component {
             myComment: [],
             replyId: null,
             loading: false,
-            pageNo: comment.pageNo + 1,
-            pageSize: comment.pageSize,
-            total: comment.total,
+            pageNo: comment.number + 1,
+            pageSize: comment.size,
+            total: comment.totalElements,
             comments: comment.content
         };
         this.handlePublish = this.handlePublish.bind(this);
@@ -58,15 +58,15 @@ class Message extends Component {
         fetchBlogCommentReq('xdbin.com', this.state.pageNo + 1)
             .then((result) => {
                 const {
-                    pageNo,
-                    pageSize,
-                    total,
+                    number,
+                    size,
+                    totalElements,
                     content
                 } = result;
                 this.setState({
-                    pageNo: pageNo + 1,
-                    pageSize,
-                    total,
+                    pageNo: number + 1,
+                    pageSize: size,
+                    total: totalElements,
                     comments: this.state.comments.concat(content)
                 });
             })

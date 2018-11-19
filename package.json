@@ -1,12 +1,13 @@
 {
   "name": "xdbin",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "V2",
   "main": "index.js",
   "scripts": {
     "build": "next build",
     "start": "next",
-    "dev": "NODE_ENV=dev node server.js",
+    "dev": "SET NODE_ENV=dev&& node server.js",
+    "dev-unix": "NODE_ENV=dev node server.js",
     "deploy": "git pull && pm2 stop v2 && next build && pm2 start v2"
   },
   "keywords": [

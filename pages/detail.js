@@ -32,9 +32,9 @@ class Detail extends Component {
         this.state = {
             blogId: blog.blogId,
             loading: false,
-            pageNo: comment.pageNo + 1,
-            pageSize: comment.pageSize,
-            total: comment.total,
+            pageNo: comment.number + 1,
+            pageSize: comment.size,
+            total: comment.totalElements,
             comments: comment.content
         };
         this.handleLoadMoreComment = this.handleLoadMoreComment.bind(this);
@@ -45,15 +45,15 @@ class Detail extends Component {
         fetchBlogCommentReq(this.state.blogId, this.state.pageNo + 1)
             .then((result) => {
                 const {
-                    pageNo,
-                    pageSize,
-                    total,
+                    number,
+                    size,
+                    totalElements,
                     content
                 } = result;
                 this.setState({
-                    pageNo: pageNo + 1,
-                    pageSize,
-                    total,
+                    pageNo: number + 1,
+                    pageSize: size,
+                    total: totalElements,
                     comments: this.state.comments.concat(content)
                 });
             })
