@@ -66,7 +66,7 @@ export default [
         id: '8',
         title: '心情',
         description: '时晴时阴',
-        image: 'http://cdn.xdbin.com/pics/20180708004312',
+        image: 'http://cdn.xdbin.com/pics/20181129220452',
         date: '11.19.2018',
         route: '/lab/mood',
         icon: ['heartbeat']

@@ -85,7 +85,7 @@ class Mood extends Component {
         return (
             <div>
                 <Container textAlign="right" style={{ color: '#aaa' }}>
-                    {moment(new Date()).format('YYYY/MM/DD')}
+                    <Icon name="heartbeat" /> 页面加载于 {moment(this.props.global.now).format('YYYY/MM/DD HH:mm:ss')}
                 </Container>
                 <Divider />
                 {
@@ -111,13 +111,16 @@ const MoodItem = ({ mood }) => (
             <Feed.Label image={mood.avatar} />
             <Feed.Content>
                 <Feed.Summary>
-                    <Feed.User>{mood.user}</Feed.User>&nbsp;{mood.action}
+                    <Feed.User>{mood.user}</Feed.User>&nbsp;{mood.pub === 1 ? mood.action : '发表了一个秘密'}
                     <Feed.Date>{moment(mood.publishTime).fromNow()}</Feed.Date>
                 </Feed.Summary>
                 {
-                    mood.content &&
+                    mood.content ?
                     <Feed.Extra text>
                         <MarkdownPreview style={{ color: '#293846' }} text={mood.content} />
+                    </Feed.Extra> :
+                    <Feed.Extra text>
+                        [The Secret] <Icon name="lock" color="grey" />
                     </Feed.Extra>
                 }
                 <Feed.Meta>
