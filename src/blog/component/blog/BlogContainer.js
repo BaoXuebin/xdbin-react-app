@@ -17,7 +17,7 @@ const BlogContainer = ({
     }
     const blogItemHtml = blogs.map(blog => <BlogItem key={blog.blogId} blog={blog} filter={filter} />);
     return (
-        <div className="blog-item-container">
+        <div className="blog-item-container" style={{ paddingTop: 0 }}>
             {blogItemHtml}
             <Grid>
                 <Grid.Column textAlign="center">

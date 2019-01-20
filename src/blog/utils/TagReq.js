@@ -20,7 +20,7 @@ export const fetchAllTagReq = () => new Promise((resolve, reject) => {
 });
 
 export const fetchBlogByTagReq = (page, tagId) => new Promise((resolve, reject) => {
-    Net.fetch(`${FETCH_BLOGS_BY_TAG_URL}?page=${page}&tagId=${tagId}`)
+    Net.fetch(`${FETCH_BLOGS_BY_TAG_URL}?pageNo=${page}&tagId=${tagId}`)
         .then((data) => {
             resolve(data);
         })

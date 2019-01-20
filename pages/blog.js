@@ -124,11 +124,6 @@ Blog.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    loading: state.blog.loading,
-    more: state.blog.more,
-    page: state.blog.page,
-    blogs: state.blog.blogs,
-    error: state.blog.error,
     keyword: state.search.filter
 });
 

@@ -16,7 +16,7 @@ class SearchBar extends PureComponent {
     handleEnterPress(e) {
         if (e.key === 'Enter') {
             // 回车查询从第一页开始
-            this.props.onSearch(1);
+            this.props.onSearch(this.keyword.inputRef.value);
         }
     }
 

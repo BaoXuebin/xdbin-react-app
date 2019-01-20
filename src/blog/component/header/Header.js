@@ -5,8 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Segment, Container, Grid, Header, Icon, Popup } from 'semantic-ui-react';
 
 import SearchBar from '../blog/SearchBar';
-import { toggleSearchBar, changeKeyword } from '../../action/SearchAction';
-import { fetchBlogListIfNeeded } from '../../action/BlogAction';
+import { toggleSearchBar, changeKeyword, setKeyword } from '../../action/SearchAction';
 
 const NavHeader = (props) => {
     const {
@@ -60,7 +59,7 @@ const NavHeader = (props) => {
                     show={show}
                     value={keyword}
                     onChange={props.changeKeyword}
-                    onSearch={props.fetchBlogListIfNeeded}
+                    onSearch={props.setKeyword}
                 />
             }
         </div>
@@ -73,8 +72,7 @@ NavHeader.propTypes = {
     search: PropTypes.bool,
     keyword: PropTypes.string,
     toggleSearchBar: PropTypes.func.isRequired,
-    changeKeyword: PropTypes.func.isRequired,
-    fetchBlogListIfNeeded: PropTypes.func.isRequired
+    changeKeyword: PropTypes.func.isRequired
 };
 NavHeader.defaultProps = {
     logo: {
@@ -92,7 +90,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     toggleSearchBar: bindActionCreators(toggleSearchBar, dispatch),
     changeKeyword: bindActionCreators(changeKeyword, dispatch),
-    fetchBlogListIfNeeded: bindActionCreators(fetchBlogListIfNeeded, dispatch)
+    setKeyword: bindActionCreators(setKeyword, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavHeader);

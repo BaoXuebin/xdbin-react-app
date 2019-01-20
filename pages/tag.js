@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
-import { bindActionCreators } from 'redux';
 import { Divider } from 'semantic-ui-react';
 
 import { redirect, fetchAllTagReq, fetchBlogByTagReq } from '../src/blog/utils/TagReq';
-import { fetchBlogByTagIfNeeded, initBlogs } from '../src/blog/action/TagAction';
 import TagStore from '../src/blog/store/TagStore';
 import Layout from '../src/blog/container/Layout';
 import TagPool from '../src/blog/component/tag/TagPool';
@@ -26,9 +24,6 @@ class Tag extends Component {
             .then((tags) => { global.tags = tags; })
             .catch(() => { redirect(ctx.res); });
         if (tagId) {
-            await fetchBlogByTagReq(1, tagId)
-                .then((blogs) => { global.blogs = blogs; })
-                .catch(() => { redirect(ctx.res); });
             const filterTag = global.tags.filter(tag => `${tag.tagId}` === tagId);
             global.selectTag = filterTag && filterTag.length > 0 ? filterTag[0] : null;
         }
@@ -37,25 +32,40 @@ class Tag extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true,
+            pageNo: 1,
+            pageSize: 10,
+            total: 0,
+            blogs: [],
+            last: false
+        };
         this.tagId = this.props.global.selectTag ? this.props.global.selectTag.tagId : null;
-        this.handleFetchMoreBlog = this.handleFetchMoreBlog.bind(this);
+        this.handleFetchBlogsByTagId = this.handleFetchBlogsByTagId.bind(this);
     }
 
-    componentWillMount() {
-        const { blogs } = this.props.global;
-        this.props.initBlogs(blogs);
+    componentDidMount() {
+        this.handleFetchBlogsByTagId({ append: false, pageNo: 1, tagId: this.tagId });
     }
 
-    handleFetchMoreBlog() {
-        if (this.tagId) {
-            const { page } = this.props;
-            this.props.fetchBlogByTagIfNeeded(page + 1, this.tagId);
-        }
+    handleFetchBlogsByTagId({ append, pageNo, tagId }) {
+        this.setState({ loading: true });
+        fetchBlogByTagReq(pageNo, tagId)
+            .then((blog) => {
+                const { content, pageNo, pageSize, last, total } = blog;
+                this.setState({
+                    blogs: append ? this.state.blogs.concat(content) : content,
+                    pageNo, pageSize, last, total
+                });
+                console.log(blog);
+            })
+            .catch(() => { redirect(ctx.res); })
+            .finally(() => { this.setState({ loading: false }); });
     }
 
     render() {
         const { tags, selectTag } = this.props.global;
-        const { blogs, more, loading } = this.props;
+        const { blogs, last, loading } = this.state;
         return [
             <TagPool key="tagPool" tags={tags} selectTag={selectTag} />,
             <Divider key="blogDivider" />,
@@ -63,34 +73,15 @@ class Tag extends Component {
                 key="BlogContainer"
                 blogs={blogs}
                 loading={loading}
-                onFetch={this.handleFetchMoreBlog}
-                more={more}
+                onFetch={() => { this.handleFetchBlogsByTagId({ append: true, pageNo: pageNo + 1, tagId: this.tagId }); }}
+                more={!last}
             />
         ];
     }
 }
 
 Tag.propTypes = {
-    global: PropTypes.shape().isRequired,
-    page: PropTypes.number.isRequired,
-    loading: PropTypes.bool.isRequired,
-    more: PropTypes.bool.isRequired,
-    blogs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-    fetchBlogByTagIfNeeded: PropTypes.func.isRequired,
-    initBlogs: PropTypes.func.isRequired
+    global: PropTypes.shape().isRequired
 };
 
-const mapStateToProps = state => ({
-    loading: state.tag.loading,
-    more: state.tag.more,
-    page: state.tag.page,
-    blogs: state.tag.blogs,
-    error: state.tag.error
-});
-
-const mapDispatchToProps = dispatch => ({
-    initBlogs: bindActionCreators(initBlogs, dispatch),
-    fetchBlogByTagIfNeeded: bindActionCreators(fetchBlogByTagIfNeeded, dispatch)
-});
-
-export default withRedux(TagStore, mapStateToProps, mapDispatchToProps)(Layout(Tag));
+export default withRedux(TagStore, null, null)(Layout(Tag));
