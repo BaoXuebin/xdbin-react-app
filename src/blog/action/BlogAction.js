@@ -33,7 +33,7 @@ const fetchBlogListError = error => ({
 });
 
 // append 查询结果是否追加
-export const fetchBlogListIfNeeded = (page, append) => (dispatch, getState) => {
+export const fetchBlogListIfNeeded = (page, month, append) => (dispatch, getState) => {
     const { loading } = getState().blog;
     const { keyword } = getState().search;
     if (loading) {
@@ -43,7 +43,7 @@ export const fetchBlogListIfNeeded = (page, append) => (dispatch, getState) => {
         dispatch(setKeyword(keyword));
     }
     dispatch(fetchBlogList());
-    return fetchBlogListReq(page, keyword)
+    return fetchBlogListReq({ page, keyword, month })
         .then((blogs) => { dispatch(fetchBlogListSuccess(page, blogs, append)); })
         .catch((err) => { dispatch(fetchBlogListError(err)); });
 };

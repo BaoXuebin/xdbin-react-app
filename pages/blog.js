@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Container, Dropdown, Divider, Grid } from 'semantic-ui-react';
 import withRedux from 'next-redux-wrapper';
-import { bindActionCreators } from 'redux';
 
 import BlogStore from '../src/blog/store/BlogStore';
-import { fetchBlogListIfNeeded, initBlogs } from '../src/blog/action/BlogAction';
-import { fetchBlogListReq } from '../src/blog/utils/BlogReq';
+import { fetchBlogListReq, fetchGroupByMonthly } from '../src/blog/utils/BlogReq';
 import Layout from '../src/blog/container/Layout';
 import BlogContainer from '../src/blog/component/blog/BlogContainer';
 
@@ -20,55 +19,105 @@ class Blog extends Component {
             },
             search: true
         };
-        await fetchBlogListReq(global.page)
-            .then((blogs) => { global.blogs = blogs; })
+        await fetchBlogListReq({ pageNo: global.page })
+            .then((blog) => { global.blog = blog; })
             .catch((e) => { console.log(e); });
         return { global };
     }
 
     constructor(props) {
         super(props);
-        this.handleFetchMoreBlog = this.handleFetchMoreBlog.bind(this);
+        const { blog } = this.props.global;
+        this.state = {
+            loading: false,
+            pageNo: blog.pageNo,
+            pageSize: blog.pageSize,
+            total: blog.total,
+            blogs: blog.content,
+            last: blog.last,
+            months: [],
+            monthly: '全部'
+        };
+        this.handleChangeMonth = this.handleChangeMonth.bind(this);
+        this.handleFetchBlogList = this.handleFetchBlogList.bind(this);
     }
 
-    componentWillMount() {
-        const { blogs } = this.props.global;
-        this.props.initBlogs(blogs);
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.keyword !== this.props.keyword) {
+            this.handleFetchBlogList({ append: false, pageNo: 1, title: nextProps.keyword });
+        }
     }
 
-    handleFetchMoreBlog() {
-        const { page } = this.props;
-        this.props.fetchBlogListIfNeeded(page + 1, true);
+    componentDidMount() {
+        fetchGroupByMonthly()
+            .then((res) => {
+                this.setState({
+                    months: res
+                });
+            })
+            .catch((e) => { console.error(e); });
+    }
+
+    handleFetchBlogList({ append = true, pageNo, monthly, title }) {
+        title = title || this.props.keyword;
+        pageNo = pageNo || this.state.pageNo;
+        monthly = monthly || this.state.monthly;
+        const month = monthly === '全部' ? '' : this.state.monthly;
+        this.setState({ loading: true });
+        fetchBlogListReq({ pageNo, month, title })
+            .then((blog) => {
+                const { content, last, pageNo, pageSize, total } = blog;
+                this.setState({
+                    blogs: append ? this.state.blogs.concat(content) : content,
+                    last, pageNo, pageSize, total
+                });
+            })
+            .catch((e) => { console.log(e); })
+            .finally(() => { this.setState({ loading: false }); });
+    }
+
+    handleChangeMonth(event, data) {
+        if (data.value !== this.state.monthly) {
+            this.setState({ monthly: data.value }, () => {
+                this.handleFetchBlogList({ append: false, pageNo: 1, monthly: this.state.monthly });
+            });
+        }
     }
 
     render() {
-        const {
-            loading,
-            blogs,
-            keyword,
-            more
-        } = this.props;
-        return (
+        const { keyword } = this.props;
+        const { months, monthly, blogs, loading, last, pageNo, total } = this.state;
+        const options = months.map(m => ({ key: m.month, value: m.month, text: `${m.month} [${m.count}篇]` }));
+        options.unshift({ key: 'all', value: '', text: '全部' });
+        return [
+            <Container key="condition-dropdown">
+                <Grid>
+                    <Grid.Row columns={2}>
+                        <Grid.Column textAlign="left">
+                            <span style={{ marginLeft: '2rem' }}>共 {total} 篇</span>
+                        </Grid.Column>
+                        <Grid.Column textAlign="right">
+                            <Dropdown style={{ marginRight: '2rem' }} text={monthly || '全部'} options={options} onChange={this.handleChangeMonth} />, 
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+            </Container>,
+            <Divider key="divider" />,
             <BlogContainer
+                key="BlogContainer"
                 loading={loading}
                 blogs={blogs}
-                onFetch={this.handleFetchMoreBlog}
+                onFetch={() => { this.handleFetchBlogList({ append: true, pageNo: pageNo + 1 }); }}
                 filter={keyword}
-                more={more}
+                more={!last}
             />
-        );
+        ];
     }
 }
 
 Blog.propTypes = {
     keyword: PropTypes.string,
-    global: PropTypes.shape().isRequired,
-    loading: PropTypes.bool.isRequired,
-    more: PropTypes.bool.isRequired,
-    page: PropTypes.number.isRequired,
-    blogs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-    fetchBlogListIfNeeded: PropTypes.func.isRequired,
-    initBlogs: PropTypes.func.isRequired
+    global: PropTypes.shape().isRequired
 };
 Blog.defaultProps = {
     keyword: null
@@ -83,9 +132,4 @@ const mapStateToProps = state => ({
     keyword: state.search.filter
 });
 
-const mapDispatchToProps = dispatch => ({
-    initBlogs: bindActionCreators(initBlogs, dispatch),
-    fetchBlogListIfNeeded: bindActionCreators(fetchBlogListIfNeeded, dispatch)
-});
-
-export default withRedux(BlogStore, mapStateToProps, mapDispatchToProps)(Layout(Blog));
+export default withRedux(BlogStore, mapStateToProps, null)(Layout(Blog));
