@@ -33,3 +33,6 @@ export const PUBLISH_COMMENT = `${base}comment`; // POST 请求
 // mood
 export const FETCH_MOOD_PAGE_URL = `${base}mood`;
 export const SAVE_MOOD_URL = `${base}mood`;
+
+// note
+export const FETCH_NOTE_PAGE_URL = `${base}note`;
