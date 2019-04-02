@@ -142,7 +142,13 @@ const MoodItem = ({ mood }) => (
                 :
                 <div>
                   {
-                    mood.images.map(img => <a key={img}><img style={{ width: '6em', height: '6em' }} src={img} /></a>)
+                    mood.images.map(img =>
+                      <a key={img}>
+                        <Modal trigger={<img style={{ width: '6em', height: '6em' }} src={img} />} basic size='large'>
+                          <Modal.Content style={{ textAlign: 'center' }}>
+                            <img style={{ maxWidth: '100%' }} src={img} />
+                          </Modal.Content>
+                        </Modal></a>)
                   }
                 </div>
             }
