@@ -45,7 +45,6 @@ class Mood extends Component {
     this.setState({ loading: true });
     fetchNotesByPage(this.state.pageNo + 1)
       .then((result) => {
-        console.log(result);
         const {
           pageNo,
           total,

@@ -44,23 +44,6 @@ app.prepare()
             app.render(req, res, actualPage, queryParams);
         });
 
-        // 后台管理
-        server.get('/mana', (req, res) => {
-            const actualPage = '/mana/blog';
-            app.render(req, res, actualPage);
-        });
-        // 笔记编辑
-        server.get('/blog/:blogId/edit', (req, res) => {
-            const actualPage = '/mana/edit';
-            const queryParams = { blogId: req.params.blogId };
-            app.render(req, res, actualPage, queryParams);
-        });
-        // 添加笔记
-        server.get('/mana/add', (req, res) => {
-            const actualPage = '/mana/add';
-            app.render(req, res, actualPage);
-        });
-
         server.get('*', (req, res) => handle(req, res));
 
         server.listen(port, (err) => {

@@ -36,3 +36,6 @@ export const SAVE_MOOD_URL = `${base}mood`;
 
 // note
 export const FETCH_NOTE_PAGE_URL = `${base}note`;
+
+// book
+export const FETCH_ALL_BOOK_URL = `${base}book`;

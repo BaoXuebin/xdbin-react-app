@@ -70,5 +70,23 @@ export default [
         date: '11.19.2018',
         route: '/lab/mood',
         icon: ['heartbeat']
-    }
+    },
+    {
+        id: '9',
+        title: '图书',
+        description: '书是人类进步的阶梯。',
+        image: '',
+        date: '04.22.2018',
+        route: '/lab/book',
+        icon: ['book']
+    },
+    {
+        id: '10',
+        title: 'foto',
+        description: '摄影',
+        image: 'http://cdn.xdbin.com/pics/20190422202812',
+        date: '04.22.2018',
+        route: '/lab/foto',
+        icon: ['camera retro', 'images']
+    },
 ];
