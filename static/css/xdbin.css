@@ -94,3 +94,41 @@ video::-webkit-media-controls-panel {width: calc(100% + 30px);}
 .shot img { position: absolute; border: 8px solid whitesmoke; }
 
 .single-line { white-space: nowrap; overflow: hidden; -o-text-overflow: ellipsis; text-overflow: ellipsis; }
+
+.lab-container .cover-container {
+    display: flex;
+    justify-content: left;
+    margin: 16px;
+}
+
+.lab-container .cover-container .cover {
+    flex: 1;
+    max-width: 160px;
+    cursor: pointer;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    /* box-shadow: 0 0 16px #ccc; */
+    overflow: hidden;
+}
+
+.lab-container .detail {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.lab-container .detail .title {
+    font-size: 24px;
+    font-weight: 600;
+} 
+
+.lab-container .detail .extra {
+    color: gray;
+    font-size: 14px;
+    margin: 12px 0;
+}
+
+.lab-container .feed-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

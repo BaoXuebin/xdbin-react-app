@@ -75,7 +75,7 @@ export default [
         id: '9',
         title: '图书',
         description: '书是人类进步的阶梯。',
-        image: '',
+        image: 'http://cdn.xdbin.com/pics/20190505115850',
         date: '04.22.2018',
         route: '/lab/book',
         icon: ['book']

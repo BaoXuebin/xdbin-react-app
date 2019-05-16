@@ -18,7 +18,6 @@ class Book extends Component {
     };
     await fetchAllBooksReq({ pageNo: 1, pageSize: 12 })
       .then((res) => {
-        console.log(res);
         const { content, last, pageNo, pageSize, total } = res;
         global.books = content;
         global.last = last;
@@ -62,7 +61,6 @@ class Book extends Component {
 
   render() {
     const { books, last, loading } = this.state;
-    console.log(books);
     const _html = books.map(book => <Grid.Column key={book.id}><BookItem book={book} /></Grid.Column>);
     return (
       <Segment className="lab-container">

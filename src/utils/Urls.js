@@ -39,3 +39,5 @@ export const FETCH_NOTE_PAGE_URL = `${base}note`;
 
 // book
 export const FETCH_ALL_BOOK_URL = `${base}book`;
+export const FETCH_BOOK_BY_BOOKID_URL = `${base}book/all/`;
+export const FETCH_BOOK_COMMENT_URL = `${base}book/`;

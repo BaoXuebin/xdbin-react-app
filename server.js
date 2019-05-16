@@ -44,6 +44,12 @@ app.prepare()
             app.render(req, res, actualPage, queryParams);
         });
 
+        server.get('/lab/book/:bookId', (req, res) => {
+            const actualPage = '/lab/bookDetail';
+            const queryParams = { bookId: req.params.bookId };
+            app.render(req, res, actualPage, queryParams);
+        });
+
         server.get('*', (req, res) => handle(req, res));
 
         server.listen(port, (err) => {

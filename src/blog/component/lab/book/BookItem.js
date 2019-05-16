@@ -1,9 +1,10 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
+import { href } from '../../../../utils/Req';
 
 const BookItem = ({ book }) => (
   <div>
-    <div className="book-item-component">
+    <div className="book-item-component" onClick={() => { href(`/lab/book/${book.id}`); }}>
       <div className="book-conver">
         <Image
           fluid
