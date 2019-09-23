@@ -11,7 +11,7 @@ const port = 3001;
 app.prepare()
     .then(() => {
         const server = express();
-        server.use('/api', proxy('https://xdbin.com/'));
+        server.use('/api', proxy('https://api.xdbin.com/'));
         server.use('/netease', proxy('http://47.104.56.20:4000/'));
         // server.use('/api', proxy('http://localhost:8080'));
         server.use('/static', express.static('static'));

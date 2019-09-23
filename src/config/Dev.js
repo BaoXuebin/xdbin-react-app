@@ -5,5 +5,5 @@ export default {
     website: 'dev',
     basePath: 'http://localhost:3001/',
     // 接口
-    baseUrl: 'http://localhost:3001/api/api/v1/'
+    baseUrl: 'http://localhost:3001/api/v1/'
 };

@@ -20,7 +20,7 @@ class Blog extends Component {
             search: true
         };
         await fetchBlogListReq({ pageNo: global.page })
-            .then((blog) => { global.blog = blog; })
+            .then((blog) => { global.blog = blog; console.log(blog); })
             .catch((e) => { console.log(e); });
         return { global };
     }

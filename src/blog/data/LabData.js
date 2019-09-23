@@ -79,14 +79,5 @@ export default [
         date: '04.22.2018',
         route: '/lab/book',
         icon: ['book']
-    },
-    {
-        id: '10',
-        title: 'foto',
-        description: '摄影',
-        image: 'http://cdn.xdbin.com/pics/20190422202812',
-        date: '04.22.2018',
-        route: '/lab/foto',
-        icon: ['camera retro', 'images']
-    },
+    }
 ];

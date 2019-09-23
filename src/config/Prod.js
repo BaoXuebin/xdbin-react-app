@@ -3,5 +3,5 @@ export default {
     NODE_ENV: 'production', // 生产环境
     basePath: 'https://xdbin.com/',
     // 接口的 baseUrl
-    baseUrl: 'https://xdbin.com/api/api/v1/'
+    baseUrl: 'https://blog.xdbin.com/api/v1/'
 };
